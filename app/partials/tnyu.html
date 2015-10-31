@@ -1,27 +1,19 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
     <div ng-if="eboard == true">
         <section id="eboard">
-            <h3>Internal Platforms</h3>
+            <h3>General Internal Platforms</h3>
             <table>
-                <tr>
-                    <th style="padding-right: 10px;">Intranet</th>
-                    <td>The Intranet is a platform</td>
-                </tr>
-                <tr>
-                    <th style="padding-right: 10px;">Discuss</th>
-                    <td></td>
+                <tr ng-repeat="platform in platforms">
+                    <th style="padding-right: 10px;" ng-bind-html="'{{platform.name}}'"></th>
+                    <td ng-bind-html="'{{platform.description}}'"></td>
                 </tr>
             </table>
             </br>
             <h3>Public-facing websites</h3>
             <table>
-                <tr>
-                    <th style="padding-right: 10px;"><a>Startup Week</th>
-                    <td><a href="http://normal.nyusw.com/">Startup Week</a> or <a href="http://fair.nyusw.com/">Career Fair</a></td>
-                </tr>
-                <tr>
-                    <th style="padding-right: 10px;">Job Board</th>
-                    <td></td>
+                <tr ng-repeat="site in staticsites">
+                    <th style="padding-right: 10px;" ng-bind-html="'{{site.name}}'"></th>
+                    <td ng-bind-html="'{{site.description}}'"></td>
                 </tr>
             </table>
         </section>
