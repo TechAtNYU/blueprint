@@ -1,0 +1,33 @@
+<div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+    <div ng-if="eboard == true">
+        <section id="eboard">
+            <h3>Internal Platforms</h3>
+            <table>
+                <tr>
+                    <th style="padding-right: 10px;">Intranet</th>
+                    <td>The Intranet is a platform</td>
+                </tr>
+                <tr>
+                    <th style="padding-right: 10px;">Discuss</th>
+                    <td></td>
+                </tr>
+            </table>
+            </br>
+            <h3>Public-facing websites</h3>
+            <table>
+                <tr>
+                    <th style="padding-right: 10px;"><a>Startup Week</th>
+                    <td><a href="http://normal.nyusw.com/">Startup Week</a> or <a href="http://fair.nyusw.com/">Career Fair</a></td>
+                </tr>
+                <tr>
+                    <th style="padding-right: 10px;">Job Board</th>
+                    <td></td>
+                </tr>
+            </table>
+        </section>
+    </div>
+    <div ng-if="eboard == false">
+        <h2>You're not on the e-board :(</h2>
+        <p>Come to our <a href="http://cal.techatnyu.org/">events</a>!</p>
+    </div>
+</div>
