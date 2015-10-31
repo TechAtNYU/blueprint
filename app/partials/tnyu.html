@@ -4,7 +4,7 @@
             <h3>General Internal Platforms</h3>
             <table>
                 <tr ng-repeat="platform in platforms">
-                    <th style="padding-right: 10px;" ng-bind-html="'{{platform.name}}'"></th>
+                    <th style="padding-right: 10px;"><a href="{{platform.url}}">{{platform.name}}</a></th>
                     <td ng-bind-html="'{{platform.description}}'"></td>
                 </tr>
             </table>
@@ -12,7 +12,7 @@
             <h3>Public-facing websites</h3>
             <table>
                 <tr ng-repeat="site in staticsites">
-                    <th style="padding-right: 10px;" ng-bind-html="'{{site.name}}'"></th>
+                    <th style="padding-right: 10px;"><a href="{{site.url}}">{{site.name}}</a></th>
                     <td ng-bind-html="'{{site.description}}'"></td>
                 </tr>
             </table>

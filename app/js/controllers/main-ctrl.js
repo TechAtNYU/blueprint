@@ -6,53 +6,65 @@ angular
     $scope.eboard = true;
     $scope.platforms = [
         {
-            "name": "<a href=\"https://api.tnyu.org\">API</a>",
+            "name": "API",
+            "url": "https://api.tnyu.org",
             "description": "Stores/offers access to all Tech@NYU-related data."
         },
         {
-            "name": "<a href=\"http://intranet.sexy\">Intranet</a>",
+            "name": "Intranet",
+            "url": "http://intranet.sexy",
             "description": "Administration system to interact with the API."
         },
         {
-            "name": "<a href=\"http://discuss.techatnyu.org/\">Discuss</a>",
+            "name": "Discuss",
+            "url": "http://discuss.techatnyu.org",
             "description": "Platform to discuss issues surrounding Tech@NYU."
         },
         {
-            "name": "<a href=\"http://bd.techatnyu.org/\">Zurmo</a>",
+            "name": "Zurmo",
+            "url": "http://bd.techatnyu.org",
             "description": "Customer relationship management."
         },
         {
-            "name": "<a href=\"http://jira.tnyu.org/\">Jira</a>",
+            "name": "Jira",
+            "url": "http://jira.tnyu.org",
             "description": "Issue and project tracking platform."
         },
         {
-            "name": "<a href=\"http://overlord.tnyu.org/\">Overlord</a>",
+            "name": "Overlord",
+            "url": "http://overlord.tnyu.org",
             "description": "Celery task runner."
         },
         {
-            "name": "<a href=\"https://zulip.tnyu.org/\">Zulip</a>",
+            "name": "Zulip",
+            "url": "https://zulip.tnyu.org",
             "description": "Instance of Zulip."
         }
     ];
     $scope.staticsites = [
         {
-            "name": "<a href=\"http://techatnyu.org\">Homepage</a>",
+            "name": "Homepage",
+            "url": "http://techatnyu.org",
             "description": "Main Tech@NYU site"
         },
         {
-            "name": "<a href=\"http://cal.techatnyu.org\">Cal</a>",
+            "name": "Cal",
+            "url": "http://cal.techatnyu.org",
             "description": "Calendar generated using the API"
         },
         {
-            "name": "<a href=\"http://checkin.techatnyu.org\">Checkin</a>",
+            "name": "Checkin",
+            "url": "http://checkin.techatnyu.org",
             "description": "Check people into events"
         },
         {
-            "name": "<a href=\"http://normal.nyusw.com\">Startup Week</a>",
+            "name": "Startup Week",
+            "url": "http://normal.nyusw.com",
             "description": "Spring 2015 #nyusw site"
         },
         {
-            "name": "<a href=\"http://fair.nyusw.com\">Career Fair</a>",
+            "name": "Career Fair",
+            "url": "http://fair.nyusw.com",
             "description": "Fall 2015 #nyusw site"
         }
     ];
