@@ -8,37 +8,44 @@ angular
         {
             "name": "API",
             "url": "https://api.tnyu.org",
-            "description": "Stores/offers access to all Tech@NYU-related data."
+            "description": "Stores/offers access to all Tech@NYU-related data.",
+            "for": "General Internal Platforms"
         },
         {
             "name": "Intranet",
             "url": "http://intranet.sexy",
-            "description": "Administration system to interact with the API."
+            "description": "Administration system to interact with the API.",
+            "for": "General Internal Platforms"
         },
         {
             "name": "Discuss",
             "url": "http://discuss.techatnyu.org",
-            "description": "Platform to discuss issues surrounding Tech@NYU."
+            "description": "Platform to discuss issues surrounding Tech@NYU.",
+            "for": "General Internal Platforms"
         },
         {
             "name": "Zurmo",
             "url": "http://bd.techatnyu.org",
-            "description": "Customer relationship management."
+            "description": "Customer relationship management.",
+            "for": "Business Development",
         },
         {
             "name": "Jira",
             "url": "http://jira.tnyu.org",
-            "description": "Issue and project tracking platform."
+            "description": "Issue and project tracking platform.",
+            "for": "General Internal Platforms"
         },
         {
             "name": "Overlord",
             "url": "http://overlord.tnyu.org",
-            "description": "Celery task runner."
+            "description": "Celery task runner.",
+            "for": "Infrastructure"
         },
         {
             "name": "Zulip",
             "url": "https://zulip.tnyu.org",
-            "description": "Instance of Zulip."
+            "description": "Instance of Zulip.",
+            "for": "General Internal Platforms"
         }
     ];
     $scope.staticsites = [

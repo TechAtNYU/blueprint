@@ -1,21 +1,24 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
     <div ng-if="eboard == true">
         <section id="eboard">
-            <h3>General Internal Platforms</h3>
-            <table>
-                <tr ng-repeat="platform in platforms">
-                    <th style="padding-right: 10px;"><a href="{{platform.url}}">{{platform.name}}</a></th>
-                    <td ng-bind-html="'{{platform.description}}'"></td>
-                </tr>
-            </table>
-            </br>
             <h3>Public-facing websites</h3>
             <table>
                 <tr ng-repeat="site in staticsites">
                     <th style="padding-right: 10px;"><a href="{{site.url}}">{{site.name}}</a></th>
-                    <td ng-bind-html="'{{site.description}}'"></td>
+                    <td>{{site.description}}</td>
                 </tr>
             </table>
+            </br>
+            <section ng-repeat="singlePlatform in platforms | unique: 'for'">
+                <h3>{{singlePlatform.for}}</h3>
+                <table>
+                    <tr ng-repeat="platform in platforms | filterBy: ['for']: singlePlatform.for">
+                        <th style="padding-right: 10px;"><a href="{{platform.url}}">{{platform.name}}</a></th>
+                        <td>{{platform.description}}</td>
+                    </tr>
+                </table>
+                </br>
+            </section>
         </section>
     </div>
     <div ng-if="eboard == false">
