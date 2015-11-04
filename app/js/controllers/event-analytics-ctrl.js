@@ -61,9 +61,10 @@ angular
 		ezfb.getLoginStatus()
 		.then(function (res) {
 			if (res.status === 'connected') {
-			  	ezfb.api('/' + facebookEventID + '?fields=noreply,declined,attending,maybe').then(function (resp) {
-			  			$scope.facebookEvent = resp;
-			  			return resp;
+			  	ezfb.api('/' + facebookEventID + '?fields=noreply.limit(1000),declined.limit(1000),attending.limit(1000),maybe.limit(1000)').then(function (resp) {
+			  		console.log(resp)
+			  		$scope.facebookEvent = resp;
+			  		return resp;
 			  	});
 			}
 		});
