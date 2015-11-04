@@ -6,8 +6,9 @@ angular.module('app',
 				['ngSanitize', 'ui.router', 'ui.bootstrap', 'restangular',
 				 'app.services', 'app.directives',
 				 'app.controllers', 'cgBusy', 'angular.filter',
+				 'ezfb',
 				]).config(function(RestangularProvider) {
-	RestangularProvider.setBaseUrl('https://api.tnyu.org/v2');
+	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3');
 	// Configuring Restangular to work with JSONAPI spec
 	RestangularProvider.setDefaultHeaders({
 		'Accept': 'application/vnd.api+json, application/*, */*',
@@ -49,4 +50,9 @@ angular.module('app',
 	});
 }).config(function(datepickerConfig) {
 	datepickerConfig.showWeeks = false;
+}).config(function (ezfbProvider) {
+  ezfbProvider.setInitParams({
+    appId: '723930997711071',
+    version: 'v2.5'
+  });  
 });

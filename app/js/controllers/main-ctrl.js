@@ -2,8 +2,31 @@
 
 angular
 .module('app.controllers')
-.controller('MainCtrl', function($scope, $location) {
-    $scope.eboard = true;
+.controller('MainCtrl', function($scope, $location, Restangular) {
+    $scope.loadingPromise = Restangular.one('people/me')
+        .get()
+        .then(function(data) {
+            $scope.eboard = true;
+            $scope.user = data;
+        })
+        .catch(function(res) {
+            var status = res.data.errors[0].status;
+            if(status === '401') {
+                $scope.signIn();
+            }
+            if(status === '403') {
+                $scope.eboard = false;
+            }
+        });
+    $scope.signIn = function() {
+        var url = 'https://api.tnyu.org/v2/auth/facebook?success=' + window.encodeURIComponent($location.absUrl());
+        window.location = url;
+    };
+
+    $scope.signOut = function() {
+        var url = 'https://api.tnyu.org/v2/auth/facebook/logout?doExternalServiceLogout=true&success=' + window.encodeURIComponent('http://google.com/');
+        window.location = url;
+    };
     $scope.platforms = [
         {
             "name": "Homepage",

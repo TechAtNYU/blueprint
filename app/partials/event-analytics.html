@@ -1,0 +1,39 @@
+<div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+<section ng-if="event && event.attributes">
+    <h2 ng-if="event.attributes.title">{{event.attributes.title}}</h1>
+    <h3>Event analytics</h3>
+    <table>
+        <tr ng-if="event.relationships && event.relationships.attendees && event.relationships.attendees.data">
+            <th>Total Event Checkins</th>
+            <td>{{event.relationships.attendees.data.length}}</td>
+        </tr>
+        <tr ng-if="event.relationships && event.relationships.rsvps && event.relationships.rsvps.data">
+            <th>Recurring RSVPs</th>
+            <td>{{event.relationships.rsvps.data.length}}</td>
+        </tr>
+        <tr ng-if="event.attributes.rsvpUrl && event.attributes.rsvpUrl.indexOf('facebook') > -1 && !facebookEvent">
+            <td>{{getDataFromFacebook(event).data.length}}</td>
+        </tr>
+        <section ng-if="facebookEvent">
+            <tr ng-if="facebookEvent.noreply">
+                <th>Facebook No Reply</th>
+                <td>{{facebookEvent.noreply.data.length}}</td>
+            </tr>
+            <tr ng-if="facebookEvent.declined">
+                <th>Facebook Declined</th>
+                <td>{{facebookEvent.declined.data.length}}</td>
+            </tr>
+            <tr ng-if="facebookEvent.maybe">
+                <th>Facebook RSVPs</th>
+                <td>{{facebookEvent.maybe.data.length}}</td>
+            </tr>
+            <tr ng-if="facebookEvent.attending">
+                <th>Facebook Attending</th>
+                <td>{{facebookEvent.attending.data.length}}</td>
+            </tr>
+        </section>
+    </table>
+    <button ng-if="!loginStatus" class="btn btn-primary" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect with Facebook</button>
+    </br>
+</section>
+</div>

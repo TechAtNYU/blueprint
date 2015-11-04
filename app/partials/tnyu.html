@@ -1,6 +1,24 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+    <div ng-if="eboard == false">
+        <h2>You're not on the e-board :(</h2>
+        <p>Come to our <a href="http://cal.techatnyu.org/">events</a>!</p>
+    </div>
     <div ng-if="eboard == true">
         <section id="eboard">
+            <section>
+                <h3>Analytics</h3>
+                <table>
+                    <tr>
+                        <th><a ui-sref="events-analytics">Events</a></th>
+                        <td>&nbsp; Analytics on our events</td>
+                    </tr>
+                    <tr>
+                        <th>Budget</a></th>
+                        <td>&nbsp; Analytics on our budget</td>
+                    </tr>
+                </table>
+                </br>
+            </section>
             <section ng-repeat="singlePlatform in platforms | unique: 'for'">
                 <h3>{{singlePlatform.for}}</h3>
                 <table>
@@ -12,9 +30,5 @@
                 </br>
             </section>
         </section>
-    </div>
-    <div ng-if="eboard == false">
-        <h2>You're not on the e-board :(</h2>
-        <p>Come to our <a href="http://cal.techatnyu.org/">events</a>!</p>
     </div>
 </div>

@@ -1,0 +1,9 @@
+<div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+    <table>
+        <tr ng-repeat="event in events" ng-if="compareDates(event)">
+            <th></th>
+            <td><a ui-sref="event-analytics({id: event.id})">{{event.attributes.title}}</a></td>
+        </tr>
+    </table>
+    </br>
+</div>

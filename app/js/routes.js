@@ -8,5 +8,15 @@ angular.module('app')
 			url: '/',
 			templateUrl: 'partials/tnyu.html',
 			controller: 'MainCtrl'
-		});
+		})
+        .state('events-analytics', {
+            url: '/events-analytics',
+            templateUrl: 'partials/events-analytics.html',
+            controller: 'EventsAnalyticsCtrl'
+        })
+        .state('event-analytics', {
+            url: '/event-analytics/:id',
+            templateUrl: 'partials/event-analytics.html',
+            controller: 'EventAnalyticsCtrl'
+        });
 });
