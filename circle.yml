@@ -3,8 +3,9 @@ machine:
     America/Los_Angeles
 
 test:
-  override:
-    - echo "No tests are needed"
+  pre:
+    - npm install -g bower
+    - cd $HOME/$CIRCLE_PROJECT_REPONAME/app && bower install angular-nvd3
 
 deployment:
   production:
