@@ -18,5 +18,10 @@ angular.module('app')
             url: '/event-analytics/:id',
             templateUrl: 'partials/event-analytics.html',
             controller: 'EventAnalyticsCtrl'
-        });
+        })
+        .state('initiative-analytics', {
+            url: '/initiative-analytics/:id',
+            templateUrl: 'partials/initiative-analytics.html',
+            controller: 'InitiativeAnalyticsCtrl'
+        });;
 });

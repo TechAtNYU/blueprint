@@ -1,0 +1,9 @@
+<div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+    <nvd3 options="options" data="data"></nvd3>
+    <table ng-repeat="event in teamEvents">
+        <tr ng-if="compareDates(event)">
+            <th></th>
+            <td>{{event.attributes.title}}</td>
+        </tr>
+    </table>
+</div>

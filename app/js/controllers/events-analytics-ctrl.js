@@ -13,4 +13,9 @@ angular
         .then(function(data) {
             $scope.events = data;
         });
+    Restangular.one('teams')
+        .get()
+        .then(function(data) {
+            $scope.teams = data;
+        });
 });
