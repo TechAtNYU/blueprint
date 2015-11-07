@@ -63,7 +63,7 @@ angular
             y: function(d){ return d.value; },
             showValues: true,
             valueFormat: function(d){
-                return d3.format(',.4f')(d);
+                return d3.format('f')(d);
             },
             transitionDuration: 500,
             xAxis: {
