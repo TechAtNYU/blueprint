@@ -5,10 +5,10 @@ angular.module('app')
 	$urlRouterProvider.otherwise('/');
 	$stateProvider
     .state('index', {
-		url: '/',
-		templateUrl: 'partials/tnyu.html',
-		controller: 'MainCtrl'
-	})
+        url: '/',
+        templateUrl: 'partials/tnyu.html',
+        controller: 'MainCtrl'
+    })
     .state('events-analytics', {
         url: '/events-analytics',
         templateUrl: 'partials/events-analytics.html',

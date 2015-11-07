@@ -12,36 +12,42 @@ angular
     Restangular.one('events?filter[simple][teams]=' + resourceId + '&sort=-startDateTime')
     .get()
     .then(function(data) {
-        $scope.teamEvents = data;
-        var mostPopular = {};
-        for (var i = data.length - 1; i >= 0; i--) {
-            if (data[i] && data[i].relationships && data[i].relationships.attendees && data[i].relationships.attendees.data) {
-                var attendees = data[i].relationships.attendees.data;
-                for (var x = attendees.length - 1; x >= 0; x--) {
-                    if (mostPopular[attendees[x].id]) {
-                        mostPopular[attendees[x].id] += 1;
-                    } else {
-                        mostPopular[attendees[x].id] = 1;
+        Restangular.one('people')
+        .get()
+        .then(function(dataPeople) {
+            var idToName = {};
+            _(dataPeople).forEach(function(person) {
+                idToName[person.id] = person.attributes.name;
+            }).value();
+            var mostPopular = {};
+            var allValues = [];
+            _(data).forEach(function(val) {
+                if (val && val.relationships && val.relationships.attendees && val.relationships.attendees.data) {
+                    var attendees = val.relationships.attendees.data;
+                    // Most frequent attendees
+                    _(attendees).forEach(function(attendee) {
+                        if (mostPopular[idToName[attendee.id]]) {
+                            mostPopular[idToName[attendee.id]] += 1;
+                        } else {
+                            mostPopular[idToName[attendee.id]] = 1;
+                        }
+                    }).value();
+                    // Checkins over time graph
+                    if (attendees.length > 1) {
+                        allValues.push({
+                            "label": val.attributes.title,
+                            "value": val.relationships.attendees.data.length
+                        });
                     }
-                };
-            }
-        };
-        $scope.mostPopular = mostPopular;
-        var allValues = [];
-        for (var i = data.length - 1; i >= 0; i--) {
-            if (data[i] && data[i].relationships && data[i].relationships.attendees && data[i].relationships.attendees.data && data[i].relationships.attendees.data.length > 1) {
-                allValues.push({
-                    "label": data[i].attributes.title,
-                    "value": data[i].relationships.attendees.data.length
-                });
-            }
-        };
-        $scope.data = [{
+                }
+            }).value();
+            $scope.teamEvents = data;
+            $scope.mostPopular = mostPopular;
+            $scope.checkinData = [{
                 key: "Cumulative Return",
                 values: allValues
-            }
-        ];
-
+            }];
+        });
     });
     $scope.options = {
         chart: {
