@@ -47,6 +47,12 @@ angular
             "for": "Public-facing websites"
         },
         {
+            "name": "RSVP",
+            "url": "http://rsvp.techatnyu.org",
+            "description": "RSVP members to one of our events",
+            "for": "Public-facing websites"
+        },
+        {
             "name": "Startup Week",
             "url": "http://normal.nyusw.com",
             "description": "Spring 2015 #nyusw site",
@@ -56,6 +62,18 @@ angular
             "name": "Career Fair",
             "url": "http://fair.nyusw.com",
             "description": "Fall 2015 #nyusw site",
+            "for": "Public-facing websites"
+        },
+        {
+            "name": "Ship",
+            "url": "http://ship.techatnyu.org",
+            "description": "List of the stuff we have shipped",
+            "for": "Public-facing websites"
+        },
+        {
+            "name": "Demodays",
+            "url": "http://demodays.co",
+            "description": "Permanent DemoDays site",
             "for": "Public-facing websites"
         },
         {
@@ -99,6 +117,12 @@ angular
             "url": "https://zulip.tnyu.org",
             "description": "Instance of Zulip.",
             "for": "General Internal Platforms"
+        },
+        {
+            "name": "Frontify",
+            "url": "https://app.frontify.com/d/MlLYiAFc3BzO/tech-nyu-style-guide",
+            "description": "Our internal style guide.",
+            "for": "Marketing"
         }
     ];
 });
