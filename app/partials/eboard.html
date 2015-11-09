@@ -5,7 +5,8 @@
         <table>
             <tr ng-repeat="member in people | filterBy: ['attributes.mainRole.name']: singleRoles.attributes.mainRole.name">
                 <th></th>
-                <td>{{member.attributes.name}}</td>
+                <td ng-if="member.attributes.mainRole.isLead === true"><b>{{member.attributes.name}}</b></td>
+                <td ng-if="!member.attributes.mainRole.isLead">{{member.attributes.name}}</td>
             </tr>
         </table>
         </br>
