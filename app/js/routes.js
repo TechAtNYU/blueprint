@@ -23,5 +23,10 @@ angular.module('app')
         url: '/initiative-analytics/:id',
         templateUrl: 'partials/initiative-analytics.html',
         controller: 'InitiativeAnalyticsCtrl'
+    })
+    .state('eboard', {
+        url: '/eboard',
+        templateUrl: 'partials/eboard.html',
+        controller: 'EboardCtrl'
     });
 });

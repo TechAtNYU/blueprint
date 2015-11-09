@@ -1,0 +1,13 @@
+<div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+    <h3>Eboard</h3>
+    <section ng-repeat="singleRoles in people | unique: 'attributes.mainRole.name'">
+        <h3>{{singleRoles.attributes.mainRole.name}}</h3>
+        <table>
+            <tr ng-repeat="member in people | filterBy: ['attributes.mainRole.name']: singleRoles.attributes.mainRole.name">
+                <th></th>
+                <td>{{member.attributes.name}}</td>
+            </tr>
+        </table>
+        </br>
+    </section>
+</div>
