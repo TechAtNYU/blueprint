@@ -3,7 +3,7 @@
     <section ng-repeat="team in teams" ng-if="team.members.length > 0">
         <h3>{{team.name}}</h3>
         <table>
-            <tr ng-repeat="member in team.members">
+            <tr ng-repeat="member in team.members | orderBy:'-isLead'">
                 <th></th>
                 <td ng-if="member.isLead === true"><b>{{member.name}}</b></td>
                 <td ng-if="member.isLead === false">{{member.name}}</td>
