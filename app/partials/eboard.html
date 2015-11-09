@@ -1,12 +1,12 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
-    <h3>Eboard</h3>
-    <section ng-repeat="singleRoles in people | unique: 'attributes.mainRole.name'">
-        <h3>{{singleRoles.attributes.mainRole.name}}</h3>
+    <h2>Eboard</h2>
+    <section ng-repeat="team in teams" ng-if="team.members.length > 0">
+        <h3>{{team.name}}</h3>
         <table>
-            <tr ng-repeat="member in people | filterBy: ['attributes.mainRole.name']: singleRoles.attributes.mainRole.name">
+            <tr ng-repeat="member in team.members">
                 <th></th>
-                <td ng-if="member.attributes.mainRole.isLead === true"><b>{{member.attributes.name}}</b></td>
-                <td ng-if="!member.attributes.mainRole.isLead">{{member.attributes.name}}</td>
+                <td ng-if="member.isLead === true"><b>{{member.name}}</b></td>
+                <td ng-if="member.isLead === false">{{member.name}}</td>
             </tr>
         </table>
         </br>
