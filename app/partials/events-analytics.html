@@ -1,7 +1,7 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
     <h3>Initiatives</h3>
     <table ng-repeat="team in teams">
-        <tr ng-if="team.attributes.isMeta === false">
+        <tr ng-if="team.attributes.hostsEvents === true">
             <th></th>
             <td><a ui-sref="initiative-analytics({id: team.id})">{{team.attributes.name}}</a></td>
         </tr>
