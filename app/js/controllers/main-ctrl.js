@@ -6,6 +6,7 @@ angular
     $scope.loadingPromise = Restangular.one('people/me')
         .get()
         .then(function(data) {
+            data = data.data;
             $scope.eboard = true;
             $scope.user = data;
         })
@@ -126,10 +127,3 @@ angular
         }
     ];
 });
-
-angular.module('app')
-.filter('to_trusted', ['$sce', function($sce){
-    return function(text) {
-        return $sce.trustAsHtml(text);
-    };
-}]);

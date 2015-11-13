@@ -11,11 +11,11 @@ angular
     $scope.loadingPromise = Restangular.one('events?sort=-startDateTime')
         .get()
         .then(function(data) {
-            $scope.events = data;
+            $scope.events = data.data;
         });
     Restangular.one('teams')
         .get()
         .then(function(data) {
-            $scope.teams = data;
+            $scope.teams = data.data;
         });
 });

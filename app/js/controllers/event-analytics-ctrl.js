@@ -69,10 +69,11 @@ angular
 			}
 		});
 	};
+
 	var resourceId = $stateParams.id;
 	$scope.loadingPromise = Restangular.one('events/' + resourceId)
 		.get()
 		.then(function(data) {
-			$scope.event = data;
+			$scope.event = data.data;
 		});
 });

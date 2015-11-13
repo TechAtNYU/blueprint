@@ -1,18 +1,23 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
     <p>Experimenting with what kinds of data on diversity we can get from the API.</p>
-    <h2>Gender Diversity</h2>
-    <section id="eboard" ng-repeat="groups in gender">
-        <h3>{{groups.name}}</h3>
-        <table ng-if="gender">
+    <section id="gender" ng-if="diversity.gender" ng-repeat="group in diversity.gender">
+        <h3>{{group.name}}</h3>
+        <table>
             <tr>
                 <th>Male</th>
-                <td>{{groups.male}}</td>
+                <td>{{group.male}}</td>
             </tr>
             <tr>
                 <th>Female</th>
-                <td>{{groups.female}}</td>
+                <td>{{group.female}}</td>
             </tr>
         </table>
+        </br>
+    </section>
+    <h2>School Diversity</h2>
+    <section id="school" ng-if="diversity.school && group.gridOptions.data.length > 0" ng-repeat="group in diversity.school">
+        <h3>{{group.name}}</h3>
+        <div ng-if="group.gridOptions" ui-grid="group.gridOptions" class="myGrid"></div>
         </br>
     </section>
 </div>

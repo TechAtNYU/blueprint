@@ -44,9 +44,11 @@ angular
     $scope.loadingPromise = Restangular.one('people')
         .get()
         .then(function(people) {
+            people = people.data;
             Restangular.one('teams')
             .get()
             .then(function(teams) {
+                teams = teams.data;
                 var teamRoleNameToName = {};
                 _(teams).forEach(function (val) {
                     teamRoleNameToName[val.attributes.roleName] = {};

@@ -12,11 +12,13 @@ angular
 	Restangular.one('events?filter[simple][teams]=' + resourceId + '&sort=-startDateTime')
 	.get()
 	.then(function(data) {
+		data = data.data;
 		Restangular.one('people')
 		.get()
-		.then(function(dataPeople) {
+		.then(function(people) {
+			people = people.data;
 			var idToName = {};
-			_(dataPeople).forEach(function(person) {
+			_(people).forEach(function(person) {
 				idToName[person.id] = person.attributes.name;
 			}).value();
 			var mostPopular = {};
