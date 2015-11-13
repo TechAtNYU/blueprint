@@ -2,12 +2,7 @@
     <h3>Checkins over time</h3>
     <nvd3 options="options" data="checkinData"></nvd3>
     <h3>Most frequent attendees</h3>
-    <table ng-repeat="(people, amount) in mostPopular | orderBy:'amount'">
-        <tr>
-            <th></th>
-            <td>{{people}}: {{amount}}</td>
-        </tr>
-    </table>
+    <div ng-if="gridOptions" ui-grid="gridOptions" class="myGrid"></div>
     <h3>Events</h3>
     <table ng-repeat="event in teamEvents">
         <tr ng-if="compareDates(event)">

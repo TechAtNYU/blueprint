@@ -6,7 +6,7 @@ angular.module('app',
 				['ngSanitize', 'ui.router', 'ui.bootstrap', 'restangular',
 				 'app.services', 'app.directives',
 				 'app.controllers', 'cgBusy', 'angular.filter',
-				 'ezfb', 'nvd3',
+				 'ezfb', 'nvd3', 'ui.grid',
 				]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3');
 	// Configuring Restangular to work with JSONAPI spec
