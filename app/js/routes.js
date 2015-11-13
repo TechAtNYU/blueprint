@@ -28,5 +28,10 @@ angular.module('app')
         url: '/eboard',
         templateUrl: 'partials/eboard.html',
         controller: 'EboardCtrl'
+    })
+    .state('diversity', {
+        url: '/diversity',
+        templateUrl: 'partials/diversity.html',
+        controller: 'DiversityCtrl'
     });
 });

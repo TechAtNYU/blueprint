@@ -1,0 +1,18 @@
+<div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+    <p>Experimenting with what kinds of data on diversity we can get from the API.</p>
+    <h2>Gender Diversity</h2>
+    <section id="eboard" ng-repeat="groups in gender">
+        <h3>{{groups.name}}</h3>
+        <table ng-if="gender">
+            <tr>
+                <th>Male</th>
+                <td>{{groups.male}}</td>
+            </tr>
+            <tr>
+                <th>Female</th>
+                <td>{{groups.female}}</td>
+            </tr>
+        </table>
+        </br>
+    </section>
+</div>
