@@ -7,9 +7,17 @@
         </tr>
     </table>
     </br>
-    <h3>Events</h3>
+    <h3>Future Events</h3>
     <table>
-        <tr ng-repeat="event in events" ng-if="compareDates(event)">
+        <tr ng-repeat="event in events" ng-if="compareDates(event, false) && event.attributes.isInternal === false">
+            <th></th>
+            <td><a ui-sref="event-analytics({id: event.id})">{{event.attributes.title}}</a></td>
+        </tr>
+    </table>
+    <br>
+    <h3>Past Events</h3>
+    <table>
+        <tr ng-repeat="event in events" ng-if="compareDates(event, true) && event.attributes.isInternal === false">
             <th></th>
             <td><a ui-sref="event-analytics({id: event.id})">{{event.attributes.title}}</a></td>
         </tr>

@@ -4,7 +4,7 @@ angular.module('app.services', ['restangular']);
 angular.module('app.controllers', ['app.services']);
 angular.module('app',
 				['ngSanitize', 'ui.router', 'ui.bootstrap', 'restangular',
-				 'app.services', 'app.directives',
+				 'app.services', 'app.directives', 'app.filters',
 				 'app.controllers', 'cgBusy', 'angular.filter',
 				 'ezfb', 'nvd3', 'ui.grid',
 				]).config(function(RestangularProvider) {

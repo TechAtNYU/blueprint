@@ -49,6 +49,7 @@
 	<script src="/js/app.js"></script>
 	<script src="/js/routes.js"></script>
 	<script src="/js/directives.js"></script>
+	<script src="/js/filters.js"></script>
 
 	<!-- Angular Controllers -->
 	<script src="/js/controllers/main-ctrl.js"></script>
@@ -63,7 +64,7 @@
 <body ng-app="app" ng-controller="TNYUCtrl">
 	<div class="container">
 		<header>
-			<h1>Tech@NYU</h1>
+			<h1><a ui-sref="index()">Tech@NYU</a></h1>
 		</header>
 		<div ui-view></div>
 	</div>

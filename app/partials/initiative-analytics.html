@@ -1,13 +1,13 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
     <h3>Checkins over time</h3>
-    <nvd3 options="options" data="checkinData"></nvd3>
+    <nvd3 options="options" data="checkinData"></nvd3></br>
     <h3>Most frequent attendees</h3>
-    <div ng-if="gridOptions" ui-grid="gridOptions" class="myGrid"></div>
-    <h3>Events</h3>
+    <div ng-if="gridOptions" ui-grid="gridOptions" class="myGrid"></div></br>
+    <h3>Past Events</h3>
     <table ng-repeat="event in teamEvents">
         <tr ng-if="compareDates(event)">
             <th></th>
-            <td>{{event.attributes.title}}</td>
+            <td><a ui-sref="event-analytics({id: event.id})">{{event.attributes.title}}</a></td>
         </tr>
     </table>
 </div>

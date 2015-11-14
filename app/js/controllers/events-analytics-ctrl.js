@@ -3,10 +3,14 @@
 angular
 .module('app.controllers')
 .controller('EventsAnalyticsCtrl', function($scope, $location, Restangular) {
-    $scope.compareDates = function (event) {
+    $scope.compareDates = function (event, isPast) {
         var dateObj1 = new Date(event.attributes.startDateTime);
         var dateObj2 = new Date();
-        return (dateObj1 < dateObj2);
+        if (isPast) {
+            return (dateObj1 < dateObj2);
+        } else {
+            return (dateObj1 > dateObj2);
+        }
     };
     $scope.loadingPromise = Restangular.one('events?sort=-startDateTime')
         .get()
