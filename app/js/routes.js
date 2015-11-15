@@ -33,15 +33,5 @@ angular.module('app')
         url: '/diversity',
         templateUrl: 'partials/diversity.html',
         controller: 'DiversityCtrl'
-    })
-    .state('applications', {
-        url: '/applications',
-        templateUrl: 'partials/applications.html',
-        controller: 'ApplicationsCtrl'
-    })
-    .state('application', {
-        url: '/application/:id',
-        templateUrl: 'partials/application.html',
-        controller: 'ApplicationCtrl'
     });
 });
