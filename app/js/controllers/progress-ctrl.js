@@ -1,10 +1,13 @@
 'use strict';
 
+// Graph ideas:
+// 1. Number of presenters who are male and female per semester
+
 angular
 .module('app.controllers')
 .controller('ProgressCtrl', function($scope, Restangular, moment) {
 
-	function returnHighChartConfig (title, subtitle, monthCategories, yAxis, data) {
+	function returnHighChartConfig (title, subtitle, monthCategories, yAxis, yAxisMax, data) {
 		return {
 			chart: {
 				type: 'line'
@@ -21,7 +24,11 @@ angular
 			yAxis: {
 				title: {
 					text: yAxis
-				}
+				},
+				labels: {
+					useHTML: true
+				},
+				max: yAxisMax
 			},
 			plotOptions: {
 				line: {
@@ -45,6 +52,7 @@ angular
 				attendeesIdsToAttendee[val.id] = val.attributes && val.attributes.gender || undefined;
 			}).value();
 
+			var eventsWithCheckinsByEventMonth = {};
 			var checksByEventMonth = {};
 			var genderByEventMonth = {
 				'male': {},
@@ -68,6 +76,13 @@ angular
 						if (monthCategories.indexOf(currentMonth) === -1) {
 							monthCategories.push(currentMonth);
 						}
+
+						// Check how many events we have done this month
+						// that have had checkins
+						if (!eventsWithCheckinsByEventMonth[currentMonth]) {
+							eventsWithCheckinsByEventMonth[currentMonth] = 0;
+						}
+						eventsWithCheckinsByEventMonth[currentMonth] += 1;
 
 						// Check how many people checked in this month
 						if (!checksByEventMonth[currentMonth]) {
@@ -96,12 +111,18 @@ angular
 				});	
 			}
 
-			console.log(checksByEventMonth);
+			var eventsWithCheckinsDataset = [
+				{
+					name: "Checkins",
+					data: dataToArray(eventsWithCheckinsByEventMonth)
+				}
+			];
 
+			var checkinDatasetData = dataToArray(checksByEventMonth);
 			var checkinDataset = [
 				{
 					name: "Checkins",
-					data: dataToArray(checksByEventMonth)
+					data: checkinDatasetData
 				}
 			];
 
@@ -116,7 +137,12 @@ angular
 				}
 			];
 
-			$scope.HCCheckins = returnHighChartConfig('Checkins per month', 'Source: API checkin data', monthCategories, 'Checkins', checkinDataset);
-			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', genderDataset);
+			monthCategories[monthCategories.length - 1] = '<b>' + monthCategories[monthCategories.length - 1] + '</b>';
+
+			var maxNumberCheckins = Math.max.apply(Math, checkinDatasetData);
+
+			$scope.HCEventsWithCheckins = returnHighChartConfig('Events per month', 'Source: API checkin data', monthCategories, 'Checkins', null, eventsWithCheckinsDataset);
+			$scope.HCCheckins = returnHighChartConfig('Checkins per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, checkinDataset);
+			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, genderDataset);
 		});
 });
