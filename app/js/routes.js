@@ -33,5 +33,10 @@ angular.module('app')
         url: '/diversity',
         templateUrl: 'partials/diversity.html',
         controller: 'DiversityCtrl'
+    })
+    .state('progress', {
+        url: '/progress',
+        templateUrl: 'partials/progress.html',
+        controller: 'ProgressCtrl'
     });
 });

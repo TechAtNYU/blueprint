@@ -16,6 +16,8 @@ angular.module('app', [
 			   'ezfb',
 			   'nvd3',
 			   'ui.grid',
+			   'highcharts-ng',
+			   'angularMoment',
 ]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3');
 	// Configuring Restangular to work with JSONAPI spec
