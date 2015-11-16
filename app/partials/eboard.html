@@ -5,8 +5,8 @@
         <table>
             <tr ng-repeat="member in team.members | orderBy:'-isLead'">
                 <th></th>
-                <td ng-if="member.isLead === true"><b>{{member.name}}</b></td>
-                <td ng-if="member.isLead === false">{{member.name}}</td>
+                <td ng-if="member.isLead === true"><b><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></b></td>
+                <td ng-if="member.isLead === false"><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></td>
             </tr>
         </table>
         </br>

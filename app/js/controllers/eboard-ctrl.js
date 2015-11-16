@@ -35,6 +35,7 @@ angular
                 $scope.teams[valWithoutLead].members.push({
                     "name": val.attributes.name,
                     "uniqId": index,
+                    "apiId": val.id,
                     "isLead": isLead
                 });
             }).value();
