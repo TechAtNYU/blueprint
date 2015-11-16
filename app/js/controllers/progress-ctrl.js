@@ -3,6 +3,38 @@
 angular
 .module('app.controllers')
 .controller('ProgressCtrl', function($scope, Restangular, moment) {
+
+	function returnHighChartConfig (title, subtitle, monthCategories, yAxis, data) {
+		return {
+			chart: {
+				type: 'line'
+			},
+			title: {
+				text: title
+			},
+			subtitle: {
+				text: subtitle
+			},
+			xAxis: {
+				categories: monthCategories
+			},
+			yAxis: {
+				title: {
+					text: yAxis
+				}
+			},
+			plotOptions: {
+				line: {
+					dataLabels: {
+						enabled: true
+					},
+					enableMouseTracking: false
+				}
+			},
+			series: data
+		};
+	}
+
 	$scope.loadingPromise = Restangular.one('events?include=attendees&sort=+startDateTime')
 		.get()
 		.then(function(data) {
@@ -13,6 +45,7 @@ angular
 				attendeesIdsToAttendee[val.id] = val.attributes && val.attributes.gender || undefined;
 			}).value();
 
+			var checksByEventMonth = {};
 			var genderByEventMonth = {
 				'male': {},
 				'female': {}
@@ -36,6 +69,12 @@ angular
 							monthCategories.push(currentMonth);
 						}
 
+						// Check how many people checked in this month
+						if (!checksByEventMonth[currentMonth]) {
+							checksByEventMonth[currentMonth] = 0;
+						}
+						checksByEventMonth[currentMonth] += val.relationships.attendees.data.length;
+
 						// Now we know this event falls within the last 12 months.
 						_(val.relationships.attendees.data).forEach(function (checkin) {
 							var gender = attendeesIdsToAttendee[checkin.id];
@@ -57,42 +96,27 @@ angular
 				});	
 			}
 
-			var maleData = dataToArray(genderByEventMonth.male);
-			var femaleData = dataToArray(genderByEventMonth.female);
+			console.log(checksByEventMonth);
 
-			$scope.highchartsNG = {
-				chart: {
-					type: 'line'
+			var checkinDataset = [
+				{
+					name: "Checkins",
+					data: dataToArray(checksByEventMonth)
+				}
+			];
+
+			var genderDataset = [
+				{
+					name: "Male",
+					data: dataToArray(genderByEventMonth.male)
 				},
-				title: {
-					text: 'Checkins by gender per month'
-				},
-				subtitle: {
-					text: 'Source: API checkin data'
-				},
-				xAxis: {
-					categories: monthCategories
-				},
-				yAxis: {
-					title: {
-						text: 'Checkins'
-					}
-				},
-				plotOptions: {
-					line: {
-						dataLabels: {
-							enabled: true
-						},
-						enableMouseTracking: false
-					}
-				},
-				series: [{
-					name: 'Male',
-					data: maleData
-				}, {
-					name: 'Female',
-					data: femaleData
-				}]
-			};
+				{
+					name: "Female",
+					data: dataToArray(genderByEventMonth.female)
+				}
+			];
+
+			$scope.HCCheckins = returnHighChartConfig('Checkins per month', 'Source: API checkin data', monthCategories, 'Checkins', checkinDataset);
+			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', genderDataset);
 		});
 });
