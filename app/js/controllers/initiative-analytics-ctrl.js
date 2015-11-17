@@ -22,7 +22,8 @@ angular
 				idToName[person.id] = person.attributes.name;
 			}).value();
 			var mostPopular = {};
-			var allValues = [];
+			var eventNameValues = [];
+			var attendeesValues = [];
 			_(data).forEach(function(val) {
 				if (val && val.relationships && val.relationships.attendees && val.relationships.attendees.data) {
 					var attendees = val.relationships.attendees.data;
@@ -36,10 +37,8 @@ angular
 					}).value();
 					// Checkins over time graph
 					if (attendees.length > 1) {
-						allValues.push({
-							"label": val.attributes.title,
-							"value": val.relationships.attendees.data.length
-						});
+						eventNameValues.push(val.attributes.title);
+						attendeesValues.push(val.relationships.attendees.data.length);
 					}
 				}
 			}).value();
@@ -72,40 +71,39 @@ angular
 				],
 			};
 			$scope.gridOptions.data = myData;
-			$scope.checkinData = [{
-				key: "Cumulative Return",
-				values: allValues
-			}];
+
+			console.log(attendeesValues);
+			$scope.HCInitiativeAnalysis = {
+				chart: {
+					type: 'line'
+				},
+				title: {
+					text: 'Initiative Analysis'
+				},
+				subtitle: {
+					text: 'Source: API checkin data'
+				},
+				xAxis: {
+					categories: eventNameValues.reverse()
+				},
+				yAxis: {
+					title: {
+						text: 'Checkins per event'
+					},
+					labels: {
+						useHTML: true
+					},
+				},
+				plotOptions: {
+					line: {
+						dataLabels: {
+							enabled: true
+						},
+						enableMouseTracking: false
+					}
+				},
+				series: [{name: "Events", data: attendeesValues.reverse()}]
+			};
 		});
 	});
-	$scope.options = {
-		chart: {
-			type: 'discreteBarChart',
-			height: 450,
-			margin : {
-				top: 20,
-				right: 20,
-				bottom: 0,
-				left: 55
-			},
-			x: function(d){ return d.label; },
-			y: function(d){ return d.value; },
-			showValues: true,
-			valueFormat: function(d){
-				return d3.format('f')(d);
-			},
-			transitionDuration: 500,
-			xAxis: {
-				axisLabel: 'Event',
-				rotateLabels: 20,
-				tickFormat: function(d) {
-					return d.substring(0, 30);
-				},
-			},
-			yAxis: {
-				axisLabel: 'Number of attendees',
-				axisLabelDistance: 10
-			}
-		}
-	};
 });
