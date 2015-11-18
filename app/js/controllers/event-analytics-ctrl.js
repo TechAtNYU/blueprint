@@ -62,7 +62,6 @@ angular
 		.then(function (res) {
 			if (res.status === 'connected') {
 			  	ezfb.api('/' + facebookEventID + '?fields=noreply.limit(1000),declined.limit(1000),attending.limit(1000),maybe.limit(1000)').then(function (resp) {
-			  		console.log(resp)
 			  		$scope.facebookEvent = resp;
 			  		return resp;
 			  	});
@@ -81,7 +80,7 @@ angular
 					var eventData = data.data;
 					var include = data.included;
 					var survey = include[0];
-					var surveyRepsonses = include.slice(1, include.length-1)
+					var surveyRepsonses = include.slice(1, include.length);
 					var questionIdsToQuestions = {};
 
 					_(questions).forEach(function (val) {

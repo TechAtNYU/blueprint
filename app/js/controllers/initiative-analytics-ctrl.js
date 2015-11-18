@@ -71,8 +71,6 @@ angular
 				],
 			};
 			$scope.gridOptions.data = myData;
-
-			console.log(attendeesValues);
 			$scope.HCInitiativeAnalysis = {
 				chart: {
 					type: 'line'
