@@ -34,6 +34,16 @@
         </section>
     </table>
     <button class="btn btn-primary" ng-click="login()" ng-disabled="loginStatus.status == 'connected'">Connect with Facebook</button>
-    </br>
+    </br></br>
+    <section ng-if="event && event.relationships && event.relationships.feedback && event.relationships.feedback.data && event.relationships.feedback.data.length > 0">
+        <h3>Event feedback</h3>
+        <section ng-repeat="question in questions" ng-if="question.answers.length > 0">
+            <p>{{question.name}}</p>
+            <ul ng-repeat="answer in question.answers | unique: 'id'">
+                <li>{{answer.answer}}</li>
+            </ul>
+            <br>
+        </section>
+    </section>
 </section>
 </div>
