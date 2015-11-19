@@ -42,6 +42,12 @@ angular
 		};
 	}
 
+	function dataToArray (values) {
+		return $.map(values, function(value) {
+			return [value];
+		});	
+	}
+
 	$scope.loadingPromise = Restangular.one('events?include=attendees&sort=+startDateTime')
 		.get()
 		.then(function(data) {
@@ -104,16 +110,10 @@ angular
 					}
 				}
 			}).value();
-			
-			function dataToArray (values) {
-				return $.map(values, function(value) {
-					return [value];
-				});	
-			}
 
 			var eventsWithCheckinsDataset = [
 				{
-					name: "Checkins",
+					name: "Events",
 					data: dataToArray(eventsWithCheckinsByEventMonth)
 				}
 			];
@@ -141,8 +141,40 @@ angular
 
 			var maxNumberCheckins = Math.max.apply(Math, checkinDatasetData);
 
-			$scope.HCEventsWithCheckins = returnHighChartConfig('Events per month', 'Source: API checkin data', monthCategories, 'Events', null, eventsWithCheckinsDataset);
+			$scope.HCEventsWithCheckins = returnHighChartConfig('Events per month', 'Source: API checkin data', monthCategories, 'Number of events', null, eventsWithCheckinsDataset);
 			$scope.HCCheckins = returnHighChartConfig('Checkins per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, checkinDataset);
 			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, genderDataset);
+		});
+
+	Restangular.one('people?sort=+created')
+		.get()
+		.then(function(people) {
+			people = people.data;
+			var newPeoplePerMonth = {};
+			var monthCategories = [];
+
+			_(people).forEach(function (val) {
+				var aYearAgo = moment().subtract(12, 'months');
+				var currentPersonJoinDate = moment(val.attributes.created);
+				var dateComparison = currentPersonJoinDate.isAfter(aYearAgo);
+					if (dateComparison) {
+						var currentMonth = currentPersonJoinDate.format('MMM-YY');
+						if (monthCategories.indexOf(currentMonth) === -1) {
+							monthCategories.push(currentMonth);
+						}
+						if (!newPeoplePerMonth[currentMonth]) {
+							newPeoplePerMonth[currentMonth] = 0;
+						}
+						newPeoplePerMonth[currentMonth] += 1;
+					}
+			}).value();
+
+			var newPeopleDataset = [
+				{
+					name: "People",
+					data: dataToArray(newPeoplePerMonth)
+				}
+			];
+			$scope.HCNewPeople = returnHighChartConfig('New members per month', 'Source: API checkin data', monthCategories, 'Members', null, newPeopleDataset);
 		});
 });
