@@ -48,6 +48,19 @@ angular
 		});	
 	}
 
+	function eventThisSemester (event) {
+		var beginning = moment("20150902", "YYYYMMDD");
+		var ending = moment("20151223", "YYYYMMDD");
+		var currentEventTime = moment(event.attributes.startDateTime);
+		var dateComparisonAfter = currentEventTime.isAfter(beginning);
+		var dateComparisonBefore = currentEventTime.isBefore(ending);
+		if (dateComparisonAfter && dateComparisonBefore) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	$scope.loadingPromise = Restangular.one('events?include=attendees&sort=+startDateTime')
 		.get()
 		.then(function(data) {
@@ -55,7 +68,7 @@ angular
 			var attendees = data.included;
 			var attendeesIdsToAttendee = {};
 			_(attendees).forEach(function (val) {
-				attendeesIdsToAttendee[val.id] = val.attributes && val.attributes.gender || undefined;
+				attendeesIdsToAttendee[val.id] = val.attributes || undefined;
 			}).value();
 
 			var eventsWithCheckinsByEventMonth = {};
@@ -64,6 +77,8 @@ angular
 				'male': {},
 				'female': {}
 			};
+			var userIdToNumberOfCheckins = {};
+			var userIdToOnEboard = {};
 
 			var monthCategories = [];
 			var aYearAgo = moment().subtract(12, 'months');
@@ -96,11 +111,29 @@ angular
 						}
 						checksByEventMonth[currentMonth] += val.relationships.attendees.data.length;
 
+						var isEventThisSemester = eventThisSemester(val);
 						// Now we know this event falls within the last 12 months.
 						_(val.relationships.attendees.data).forEach(function (checkin) {
-							var gender = attendeesIdsToAttendee[checkin.id];
+							// Finding multiple checkins for this semester
+							// Perform date comparisons
+							if (isEventThisSemester) {
+								if (!userIdToNumberOfCheckins[checkin.id]) {
+									userIdToNumberOfCheckins[checkin.id] = 0;
+								}
+								userIdToNumberOfCheckins[checkin.id] += 1;
+							}
+
+							// User is on E-Board
+							if (!userIdToOnEboard[checkin.id]) {
+								if (attendeesIdsToAttendee[checkin.id].roles && attendeesIdsToAttendee[checkin.id].roles.length > 0) {
+									userIdToOnEboard[checkin.id] = true;
+								}
+							}
+
+							// Gender
+							var gender = attendeesIdsToAttendee[checkin.id].gender || undefined;
 							if (gender) {
-								gender = attendeesIdsToAttendee[checkin.id].toLowerCase();
+								gender = attendeesIdsToAttendee[checkin.id].gender.toLowerCase();
 								if (!genderByEventMonth[gender][currentMonth]) {
 									genderByEventMonth[gender][currentMonth] = 0;
 								}
@@ -110,10 +143,24 @@ angular
 					}
 				}
 			}).value();
+			
+			var checkinsAnalytics = {
+				general: 0,
+				eboard: 0
+			};
+
+			_(userIdToNumberOfCheckins).forEach(function (val, key) {
+				if (val > 1) {
+					if (userIdToOnEboard[key]) {
+						checkinsAnalytics.eboard += 1;
+					}
+					checkinsAnalytics.general += 1;
+				}
+			}).value();
 
 			var eventsWithCheckinsDataset = [
 				{
-					name: "Events",
+					name: 'Events',
 					data: dataToArray(eventsWithCheckinsByEventMonth)
 				}
 			];
@@ -121,18 +168,18 @@ angular
 			var checkinDatasetData = dataToArray(checksByEventMonth);
 			var checkinDataset = [
 				{
-					name: "Checkins",
+					name: 'Checkins',
 					data: checkinDatasetData
 				}
 			];
 
 			var genderDataset = [
 				{
-					name: "Male",
+					name: 'Male',
 					data: dataToArray(genderByEventMonth.male)
 				},
 				{
-					name: "Female",
+					name: 'Female',
 					data: dataToArray(genderByEventMonth.female)
 				}
 			];
@@ -144,6 +191,7 @@ angular
 			$scope.HCEventsWithCheckins = returnHighChartConfig('Events per month', 'Source: API checkin data', monthCategories, 'Number of events', null, eventsWithCheckinsDataset);
 			$scope.HCCheckins = returnHighChartConfig('Checkins per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, checkinDataset);
 			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, genderDataset);
+			$scope.checkinsAnalytics = checkinsAnalytics;
 		});
 
 	Restangular.one('people?sort=+created')
@@ -171,7 +219,7 @@ angular
 
 			var newPeopleDataset = [
 				{
-					name: "People",
+					name: 'People',
 					data: dataToArray(newPeoplePerMonth)
 				}
 			];
