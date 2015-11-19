@@ -141,7 +141,7 @@ angular
 
 			var maxNumberCheckins = Math.max.apply(Math, checkinDatasetData);
 
-			$scope.HCEventsWithCheckins = returnHighChartConfig('Events per month', 'Source: API checkin data', monthCategories, 'Checkins', null, eventsWithCheckinsDataset);
+			$scope.HCEventsWithCheckins = returnHighChartConfig('Events per month', 'Source: API checkin data', monthCategories, 'Events', null, eventsWithCheckinsDataset);
 			$scope.HCCheckins = returnHighChartConfig('Checkins per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, checkinDataset);
 			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, genderDataset);
 		});
