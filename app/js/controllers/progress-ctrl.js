@@ -49,8 +49,8 @@ angular
 	}
 
 	function eventThisSemester (event) {
-		var beginning = moment("20150902", "YYYYMMDD");
-		var ending = moment("20151223", "YYYYMMDD");
+		var beginning = moment('20150902', 'YYYYMMDD');
+		var ending = moment('20151223', 'YYYYMMDD');
 		var currentEventTime = moment(event.attributes.startDateTime);
 		var dateComparisonAfter = currentEventTime.isAfter(beginning);
 		var dateComparisonBefore = currentEventTime.isBefore(ending);
@@ -73,6 +73,7 @@ angular
 
 			var eventsWithCheckinsByEventMonth = {};
 			var checksByEventMonth = {};
+			var rsvpsByEventMonth = {};
 			var genderByEventMonth = {
 				'male': {},
 				'female': {}
@@ -110,6 +111,13 @@ angular
 							checksByEventMonth[currentMonth] = 0;
 						}
 						checksByEventMonth[currentMonth] += val.relationships.attendees.data.length;
+
+						if (!rsvpsByEventMonth[currentMonth]) {
+							rsvpsByEventMonth[currentMonth] = 0;
+						}
+						if (val.relationships && val.relationships.rsvps && val.relationships.rsvps.data && val.relationships.rsvps.data.length > 1) {
+							rsvpsByEventMonth[currentMonth] += val.relationships.rsvps.data.length;
+						}
 
 						var isEventThisSemester = eventThisSemester(val);
 						// Now we know this event falls within the last 12 months.
@@ -166,10 +174,15 @@ angular
 			];
 
 			var checkinDatasetData = dataToArray(checksByEventMonth);
+			var rsvpsDatasetData = dataToArray(rsvpsByEventMonth);
 			var checkinDataset = [
 				{
 					name: 'Checkins',
 					data: checkinDatasetData
+				},
+				{
+					name: 'RSVPs',
+					data: rsvpsDatasetData
 				}
 			];
 
@@ -187,10 +200,12 @@ angular
 			monthCategories[monthCategories.length - 1] = '<b>' + monthCategories[monthCategories.length - 1] + '</b>';
 
 			var maxNumberCheckins = Math.max.apply(Math, checkinDatasetData);
+			var maxNumberRSVPs = Math.max.apply(Math, rsvpsDatasetData);
+			var maxNumber = Math.max(maxNumberCheckins, maxNumberRSVPs);
 
 			$scope.HCEventsWithCheckins = returnHighChartConfig('Events per month', 'Source: API checkin data', monthCategories, 'Number of events', null, eventsWithCheckinsDataset);
-			$scope.HCCheckins = returnHighChartConfig('Checkins per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, checkinDataset);
-			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumberCheckins, genderDataset);
+			$scope.HCCheckins = returnHighChartConfig('RSVPs vs Checkins per month', 'Source: API checkin data', monthCategories, 'Number', maxNumber, checkinDataset);
+			$scope.HCGender = returnHighChartConfig('Checkins by gender per month', 'Source: API checkin data', monthCategories, 'Checkins', maxNumber, genderDataset);
 			$scope.checkinsAnalytics = checkinsAnalytics;
 		});
 
