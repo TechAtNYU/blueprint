@@ -72,6 +72,7 @@ angular
 
             var eventsWithCheckinsByEventMonth = {};
             var checksByEventMonth = {};
+            var uniqueCheckins = {};
             var rsvpsByEventMonth = {};
             var genderByEventMonth = {
                 'male': {},
@@ -129,6 +130,8 @@ angular
                                 }
                                 userIdToNumberOfCheckins[checkin.id] += 1;
                             }
+
+                            uniqueCheckins[checkin.id] = 1;
 
                             // User is on E-Board
                             if (!userIdToOnEboard[checkin.id]) {
@@ -211,6 +214,7 @@ angular
             $scope.totalMaleCheckins = reduceArraytoValue(genderDataset[0].data);
             $scope.totalFemaleCheckins = reduceArraytoValue(genderDataset[1].data);
             $scope.checkinsAnalytics = checkinsAnalytics;
+            $scope.uniqueCheckins = Object.keys(uniqueCheckins).length | 0;
         });
 
     Restangular.one('people?sort=+created')
