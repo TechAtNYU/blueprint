@@ -38,5 +38,10 @@ angular.module('app')
         url: '/progress',
         templateUrl: 'partials/progress.html',
         controller: 'ProgressCtrl'
+    })
+    .state('fall-2015', {
+        url: '/fall-2015',
+        templateUrl: 'partials/fall-2015.html',
+        controller: 'Fall2015Ctrl'
     });
 });
