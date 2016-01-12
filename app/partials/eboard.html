@@ -5,8 +5,11 @@
         <table>
             <tr ng-repeat="member in team.members | orderBy:'-isLead'">
                 <th></th>
-                <td ng-if="member.isLead === true"><b><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></b></td>
-                <td ng-if="member.isLead === false"><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></td>
+                <td ng-if="member">
+                    <img ng-if="member.imgUrl" width="200px" height="200px" src="{{member.imgUrl}}">
+                    <p ng-if="member.isLead === true"><b><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></b></p>
+                    <p ng-if="member.isLead === false"><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></p>
+                </td>
             </tr>
         </table>
         </br>

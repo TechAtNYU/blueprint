@@ -11,3 +11,12 @@
     max-width: 30em !important;
     margin: 1em auto;
 }
+
+tr {
+  float: left;
+}
+
+tr:nth-child(2n+1) {
+  clear: left;
+  padding-right: 10px; /* You can edit this line and add as per your style */
+}
