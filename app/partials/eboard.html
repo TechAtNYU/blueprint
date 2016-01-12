@@ -2,7 +2,7 @@
     <h2>Eboard</h2>
     <section ng-repeat="team in teams" ng-if="team.members.length > 0">
         <h3>{{team.name}}</h3>
-        <table>
+        <table id="e-board-table">
             <tr ng-repeat="member in team.members | orderBy:'-isLead'">
                 <th></th>
                 <td ng-if="member">

@@ -12,11 +12,11 @@
     margin: 1em auto;
 }
 
-tr {
+#e-board-table tr {
   float: left;
 }
 
-tr:nth-child(2n+1) {
+#e-board-table tr:nth-child(2n+1) {
   clear: left;
   padding-right: 10px; /* You can edit this line and add as per your style */
 }
