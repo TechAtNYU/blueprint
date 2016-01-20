@@ -6,7 +6,7 @@
             <table>
                 <tr ng-repeat="person in people" ng-if="people.length > 0">
                     <th style="font-weight:normal">{{person.name}}</th>
-                    <td ng-if="person.organizations.length > 0"><b>{{person.organizations[0]}}</b><i ng-if="person.organizations.length > 1">,</i> {{person.organizations.slice(1).join(', ')}}</td>
+                    <td style="padding-left:.5em;" ng-if="person.organizations.length > 0"><b>{{person.organizations[0]}}</b><i ng-if="person.organizations.length > 1">,</i> {{person.organizations.slice(1).join(', ')}}</td>
                 </tr>
             </table>
             </br>
