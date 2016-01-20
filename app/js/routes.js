@@ -29,6 +29,11 @@ angular.module('app')
         templateUrl: 'partials/eboard.html',
         controller: 'EboardCtrl'
     })
+    .state('relations', {
+        url: '/relations',
+        templateUrl: 'partials/relations.html',
+        controller: 'RelationsCtrl'
+    })
     .state('diversity', {
         url: '/diversity',
         templateUrl: 'partials/diversity.html',
