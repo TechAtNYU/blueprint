@@ -1,0 +1,15 @@
+<div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
+    <section>
+        <h2>Relations</h2>
+        <section ng-repeat="(group, people) in relations">
+            <h4>{{group}}</h3>
+            <table>
+                <tr ng-repeat="person in people" ng-if="people.length > 0">
+                    <th style="font-weight:normal">{{person.name}}</th>
+                    <td ng-if="person.organizations.length > 0"><b>{{person.organizations[0]}}</b><i ng-if="person.organizations.length > 1">,</i> {{person.organizations.slice(1).join(', ')}}</td>
+                </tr>
+            </table>
+            </br>
+        </section>
+    </section>
+</div>

@@ -114,12 +114,6 @@ angular
             "for": "Infrastructure"
         },
         {
-            "name": "Zulip",
-            "url": "https://zulip.tnyu.org",
-            "description": "Instance of Zulip.",
-            "for": "General Internal Platforms"
-        },
-        {
             "name": "Frontify",
             "url": "https://app.frontify.com/d/MlLYiAFc3BzO/tech-nyu-style-guide",
             "description": "Our internal style guide.",
