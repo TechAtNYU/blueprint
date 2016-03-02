@@ -1,25 +1,32 @@
+/**
+ * Events Analytics Controller
+ * Loads team and events data from the API to display on the view partial
+ * events-analytics.html.
+ */
 'use strict';
 
 angular
-.module('app.controllers')
-.controller('EventsAnalyticsCtrl', function($scope, $location, Restangular) {
-    $scope.compareDates = function (event, isPast) {
-        var dateObj1 = new Date(event.attributes.startDateTime);
-        var dateObj2 = new Date();
-        if (isPast) {
-            return (dateObj1 < dateObj2);
-        } else {
-            return (dateObj1 > dateObj2);
-        }
-    };
-    $scope.loadingPromise = Restangular.one('events?sort=-startDateTime')
-        .get()
-        .then(function(data) {
-            $scope.events = data.data;
-        });
-    Restangular.one('teams')
-        .get()
-        .then(function(data) {
-            $scope.teams = data.data;
-        });
-});
+    .module('app.controllers')
+    .controller('EventsAnalyticsCtrl', function($scope, $location, Restangular, DateService) {
+        /**
+         * Loads all of the event data from the API:
+         * It is loading the events in a descending order.
+         * Where the first event object is the newest event.
+         */
+        $scope.loadingPromise = Restangular.one('events?sort=-startDateTime')
+            .get()
+            .then(function(data) {
+                // Inserts the 'data' field from the API into the events scope.
+                $scope.events = data.data;
+            });
+
+        // Loads all of the teams data from the API
+        Restangular.one('teams')
+            .get()
+            .then(function(data) {
+                // Inserts the 'data' field from the API into the teams scope.
+                $scope.teams = data.data;
+            });
+
+        $scope.compareDates = DateService.compareDates;
+    });

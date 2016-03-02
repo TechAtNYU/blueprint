@@ -1,67 +1,99 @@
+/**
+ * E-board Relations Controller
+ * This takes the relationships our club has and generates a list for them.
+ * A relationship could be a user's current employer or the liaisons he/she may have.
+ */
 'use strict';
 
 angular
-.module('app.controllers')
-.controller('RelationsCtrl', function($scope, $location, Restangular) {
-    $scope.loadingPromise = Restangular.one('people?include=currentEmployer')
-        .get()
-        .then(function(peopleData) {
-            var people = peopleData.data;
-            var currentEmployer = peopleData.included;
-            Restangular.one('organizations?include=liaisons')
+    .module('app.controllers')
+    .controller('RelationsCtrl', function($scope, $location, Restangular, ResourceService) {
+        /**
+         * Gets all the people in the API alongside with their current employers.
+         */
+        $scope.loadingPromise = Restangular.one('people?include=currentEmployer')
             .get()
-            .then(function(organizationData) {
-                var organizations = organizationData.data;
-                var liaisons = organizationData.included;
-                var relations = {};
-                relations['Advisors'] = [];
-                relations['Alumni'] = [];
-                relations['E-board'] = [];
+            .then(function(peopleData) {
+                var people = peopleData.data;
 
-                var organizationIdToName = {};
-                var peopleIdToLiasons = {};
-                _(organizations).forEach(function (val) {
-                    if (val.attributes && val.attributes.name) {
-                        organizationIdToName[val.id] = val.attributes.name;
-                    }
-                    if (val.relationships && val.relationships.liaisons && val.relationships.liaisons.data && val.relationships.liaisons.data) {
-                        _(val.relationships.liaisons.data).forEach(function (singleLiason) {
-                            if (!(singleLiason.id in peopleIdToLiasons)) {
-                                peopleIdToLiasons[singleLiason.id] = [];
+                /**
+                 * Gets all the organizations in the API alongside with their liaisons
+                 * which are also people.
+                 */
+                Restangular.one('organizations?include=liaisons')
+                    .get()
+                    .then(function(organizationData) {
+                        var organizations = organizationData.data;
+
+                        // Relations hash map is just the key with the three different keys:
+                        // Advisors, Alumni, and E-board. These just categorize the three big
+                        // relationships the club has. We set these as arrays at the beginning
+                        // so we can just append objects into them.
+                        var relations = {};
+                        relations['Advisors'] = [];
+                        relations['Alumni'] = [];
+                        relations['E-board'] = [];
+
+                        // We need to generate organization Id -> organization
+                        // and people Id -> liaisons (which are people objects)
+                        var organizationIdToName = ResourceService.resourceIdToResource(organizations);
+                        var peopleIdToLiasons = {};
+
+                        // This takes a resource such as an organization and develops a map from
+                        // peopleId To Liaisons. Loops through each organization and creates a map from
+                        // the Id that the relationship represents (such as person) to the person data (or liaison data).
+                        _(organizations).forEach(function(organization) {
+                            if(organization.relationships && organization.relationships.liaisons && organization.relationships.liaisons.data && organization.relationships.liaisons.data) {
+                                ResourceService.resourceRelationToMap(organization, organization.relationships.liaisons.data, peopleIdToLiasons);
                             }
-                            peopleIdToLiasons[singleLiason.id].push(val.attributes.name);
                         }).value();
-                    }
-                }).value();
 
-                _(people).forEach(function (val) {
-                    if (val.attributes && val.attributes.roles && val.attributes.roles.length) {
-                        var currentRelation = {};
-                        currentRelation['name'] = val.attributes.name;
-                        currentRelation['organizations'] = [];
-                        if (val.relationships && val.relationships.currentEmployer && val.relationships.currentEmployer.data && val.relationships.currentEmployer.data.id) {
-                            currentRelation['organizations'].push(organizationIdToName[val.relationships.currentEmployer.data.id]);
-                        }
-                        if (val.id in peopleIdToLiasons) {
-                            _(peopleIdToLiasons[val.id]).forEach(function (singleLiason) {
-                                if (currentRelation['organizations'].indexOf(singleLiason) == -1) {
-                                    currentRelation['organizations'].push(singleLiason);
+                        // This is to map the person to the relationship and start building the relations hashmap.
+                        // First thing we do is just loop through the person array.
+                        _(people).forEach(function(person) {
+                            // We only consider people attached with our e-board at this point.
+                            if(person.attributes && person.attributes.roles && person.attributes.roles.length) {
+                                // Build a object with the name of the person, and all the organizations he/she represents.
+                                var currentRelation = {};
+                                currentRelation.name = person.attributes.name;
+                                currentRelation.organizations = [];
+
+                                // Look for the current employer that the person has. This is important as this represents a direct
+                                // relationship that they have. This is different to being a liaison. We push this relationship into
+                                // the organizations that they are in.
+                                if(person.relationships && person.relationships.currentEmployer && person.relationships.currentEmployer.data && person.relationships.currentEmployer.data.id) {
+                                    currentRelation.organizations.push(organizationIdToName[person.relationships.currentEmployer.data.id].attributes.name);
                                 }
-                            }).value();
-                        }
-                        if (val.attributes.roles.length == 1 && val.attributes.roles.indexOf('ALUM') > -1) {
-                            relations['Alumni'].push(currentRelation);
-                        } else {
-                            if (val.attributes.roles.length == 2 && val.attributes.roles.indexOf('ADVISORS') > -1) {
-                                relations['Advisors'].push(currentRelation);
-                            } else {
-                                relations['E-board'].push(currentRelation);
+
+                                // If the person is a liaison for any organization then we want to loop through and add their
+                                // relationships to the organizations they represent.
+                                if(person.id in peopleIdToLiasons) {
+                                    _(peopleIdToLiasons[person.id]).forEach(function(singleLiason) {
+                                        if(currentRelation.organizations.indexOf(singleLiason.attributes.name) === -1) {
+                                            currentRelation.organizations.push(singleLiason.attributes.name);
+                                        }
+                                    }).value();
+                                }
+
+                                // Here we easily decide what role we have to insert their data into.
+                                // The three are ALUMNI, ADVISORS, and EBOARD. Advisors still have a TEAM_MEMBER
+                                // role since they are still technically working for our e-board.
+                                if(person.attributes.roles.length === 1 && person.attributes.roles.indexOf('ALUM') > -1) {
+                                    relations['Alumni'].push(currentRelation);
+                                }
+                                else {
+                                    if(person.attributes.roles.length === 2 && person.attributes.roles.indexOf('ADVISORS') > -1) {
+                                        relations['Advisors'].push(currentRelation);
+                                    }
+                                    else {
+                                        relations['E-board'].push(currentRelation);
+                                    }
+                                }
                             }
-                        }
-                    }
-                }).value();
-                console.log(relations);
-                $scope.relations = relations;
+                        }).value();
+
+                        // Add the relations object to the current scope.
+                        $scope.relations = relations;
+                    });
             });
-        });
-});
+    });
