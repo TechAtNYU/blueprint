@@ -1,5 +1,7 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
     <h3>Initiatives</h3>
+
+    <!-- Lists all of the initiatives and links them to the initiative-analytics route -->
     <table ng-repeat="team in teams">
         <tr ng-if="team.attributes.hostsEvents === true">
             <th></th>
@@ -7,6 +9,8 @@
         </tr>
     </table>
     </br>
+
+    <!-- Lists all of the events that are coming up. Uses the compareDates function to do that -->
     <h3>Future Events</h3>
     <table>
         <tr ng-repeat="event in events" ng-if="compareDates(event, false) && event.attributes.isInternal === false">
@@ -15,6 +19,8 @@
         </tr>
     </table>
     <br>
+
+    <!-- Lists all of the events past events. Uses the compareDates function to do that -->
     <h3>Past Events</h3>
     <table>
         <tr ng-repeat="event in events" ng-if="compareDates(event, true) && event.attributes.isInternal === false">

@@ -2,10 +2,11 @@
     <h3>Checkins over time</h3>
     <highchart id="chart1" config="HCInitiativeAnalysis"></highchart>
     <h3>Most frequent attendees</h3>
-    <div ng-if="gridOptions" ui-grid="gridOptions" class="myGrid"></div></br>
+    <div ng-if="gridOptions" ui-grid="gridOptions" class="myGrid"></div>
+    </br>
     <h3>Past Events</h3>
     <table ng-repeat="event in teamEvents">
-        <tr ng-if="compareDates(event)">
+        <tr ng-if="compareDates(event, true)">
             <th></th>
             <td><a ui-sref="event-analytics({id: event.id})">{{event.attributes.title}}</a></td>
         </tr>

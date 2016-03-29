@@ -1,6 +1,6 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
-<section ng-if="event && event.attributes">
-    <h2 ng-if="event.attributes.title">{{event.attributes.title}}</h1>
+    <section ng-if="event && event.attributes">
+        <h2 ng-if="event.attributes.title">{{event.attributes.title}}</h1>
     <h3>Event analytics</h3>
     <table>
         <tr ng-if="event.relationships && event.relationships.attendees && event.relationships.attendees.data">

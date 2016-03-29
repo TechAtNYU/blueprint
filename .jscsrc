@@ -1,0 +1,67 @@
+{
+    "requireCurlyBraces": [
+        "if",
+        "else",
+        "for",
+        "while",
+        "do",
+        "try",
+        "catch"
+    ],
+    "requireParenthesesAroundIIFE": true,
+    "requireSpacesInConditionalExpression": {
+        "afterTest": true,
+        "beforeConsequent": true,
+        "afterConsequent": true,
+        "beforeAlternate": true
+    },
+    "requireSpaceAfterKeywords": [
+        "return",
+        "try"
+    ],
+    "disallowImplicitTypeConversion": ["numeric", "boolean", "binary", "string"],
+    "disallowSpaceAfterKeywords": [
+        "if",
+        "for",
+        "while",
+        "do",
+        "switch",
+        "catch"
+    ],
+    "disallowEmptyBlocks": true,
+    "requireOperatorBeforeLineBreak": true,
+    "disallowSpacesInsideParentheses": true,
+    "disallowPaddingNewlinesInBlocks": true,
+    "disallowSpacesInsideObjectBrackets": true,
+    "disallowSpacesInsideArrayBrackets": true,
+    "requireSpaceBeforeBlockStatements": true,
+    "disallowSpacesInFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+    "requireMultipleVarDecl": "onevar",
+    "requireBlocksOnNewline": true,
+    "disallowQuotedKeysInObjects": "allButReserved",
+    "disallowSpaceAfterObjectKeys": true,
+    "requireCommaBeforeLineBreak": true,
+    "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
+    "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
+    "requireSpaceBeforeBinaryOperators": true,
+    "requireSpaceAfterBinaryOperators": true,
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
+    "disallowKeywords": ["with"],
+    "disallowMultipleLineStrings": true,
+    "disallowMultipleLineBreaks": true,
+    "validateQuoteMarks": "'",
+    "validateIndentation": 4,
+    "requireOperatorBeforeLineBreak" :true,
+    "disallowMixedSpacesAndTabs": true,
+    "disallowTrailingWhitespace": true,
+    "disallowTrailingComma": true,
+    "requireKeywordsOnNewLine": ["else"],
+    "maximumLineLength": 120,
+    "requireCapitalizedConstructors": true,
+    "safeContextKeyword": ["that"],
+    "requireDotNotation": true,
+    "disallowYodaConditions": true,
+    "disallowNewlineBeforeBlockStatements": true
+}
