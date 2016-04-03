@@ -69,6 +69,16 @@ angular
             'description': 'RSVP members to one of our events',
             'for': 'Public-facing websites'
         }, {
+            'name': 'Job Board',
+            'url': 'http://jobs.techatnyu.org/',
+            'description': 'Find a job.',
+            'for': 'Public-facing websites'
+        }, {
+            'name': 'Learn',
+            'url': 'http://learn.techatnyu.org/',
+            'description': 'Learn a skill.',
+            'for': 'Public-facing websites'
+        }, {
             'name': 'Startup Week',
             'url': 'http://normal.nyusw.com',
             'description': 'Spring 2015 #nyusw site',
