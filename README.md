@@ -8,3 +8,4 @@ One-stop for all Tech@NYU information. The project is built on AngularJS.
 2. `npm install`
 3. `bower install`
 4. `npm start`
+5. Navigate to `http://localhost:3000`
