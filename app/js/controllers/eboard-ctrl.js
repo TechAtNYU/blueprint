@@ -20,6 +20,9 @@ angular
                 return false;
             }
             else {
+                // Increments the count per person in the eboard.
+                $scope.eboardSize++;
+
                 // Their TEAM_MEMBER role is not important. So we will slice it out
                 // of the roles object. It is not useful for us.
                 var teamMemberIndex = roles.indexOf('TEAM_MEMBER');
@@ -94,6 +97,9 @@ angular
                             teamRoleNameToName[team.attributes.roleName].members = [];
                         }).value();
                         $scope.teams = teamRoleNameToName;
+
+                        // Initializes the variable at 0 and is incremented later.
+                        $scope.eboardSize = 0;
 
                         // Loop through all of the people and set the roles for each individual.
                         // Noting the fact that each person can be in multiple teams.
