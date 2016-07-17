@@ -1,5 +1,6 @@
 <div cg-busy="{promise: loadingPromise, templateUrl: 'partials/loadingtemplate.html'}">
     <h2>Eboard</h2>
+    <p ng-if="eboardSize > 0">Size: {{eboardSize}} People</p>
     <section ng-repeat="team in teams" ng-if="team.members.length > 0">
         <h3>{{team.name}}</h3>
         <table id="e-board-table">
