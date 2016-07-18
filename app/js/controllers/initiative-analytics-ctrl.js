@@ -32,7 +32,9 @@ angular
                         var mostPopular = {};
                         var eventNameValues = [];
                         var attendeesValues = [];
+                        var rsvpsValues = [];
 
+                        console.log(events);
                         // Loop through events and store values for each attendee, and other measures.
                         _(events).forEach(function(event) {
                             if(event && event.relationships && event.relationships.attendees && event.relationships.attendees.data) {
@@ -54,10 +56,16 @@ angular
                                 if(attendees.length > 1) {
                                     eventNameValues.push(event.attributes.title);
                                     attendeesValues.push(event.relationships.attendees.data.length);
+                                    if (event.relationships.rsvps && event.relationships.rsvps.data) {
+                                        rsvpsValues.push(event.relationships.rsvps.data.length);
+                                    }
+                                    else {
+                                        rsvpsValues.push(null);
+                                    }
                                 }
                             }
                         }).value();
-
+                        
                         // Add event checkin data into the array so we can attach it with our gridOptions.
                         var eventCheckinData = [];
                         _(Object.keys(mostPopular)).forEach(function(val) {
@@ -120,8 +128,11 @@ angular
                                 }
                             },
                             series: [{
-                                name: 'Events',
+                                name: 'Attendees',
                                 data: attendeesValues.reverse()
+                            }, {
+                                name: 'RSVPS',
+                                data: rsvpsValues.reverse()
                             }]
                         };
 
