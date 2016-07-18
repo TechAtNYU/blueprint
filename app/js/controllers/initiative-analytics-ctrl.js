@@ -34,7 +34,6 @@ angular
                         var attendeesValues = [];
                         var rsvpsValues = [];
 
-                        console.log(events);
                         // Loop through events and store values for each attendee, and other measures.
                         _(events).forEach(function(event) {
                             if(event && event.relationships && event.relationships.attendees && event.relationships.attendees.data) {
@@ -65,7 +64,7 @@ angular
                                 }
                             }
                         }).value();
-                        
+
                         // Add event checkin data into the array so we can attach it with our gridOptions.
                         var eventCheckinData = [];
                         _(Object.keys(mostPopular)).forEach(function(val) {
