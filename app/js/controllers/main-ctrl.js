@@ -79,9 +79,14 @@ angular
             'description': 'Learn a skill.',
             'for': 'Public-facing websites'
         }, {
-            'name': 'Startup Week',
+            'name': 'Startup Week 2015',
             'url': 'http://normal.nyusw.com',
             'description': 'Spring 2015 #nyusw site',
+            'for': 'Public-facing websites'
+        }, {
+            'name': 'Startup Week 2016',
+            'url': 'http://nyusw.com',
+            'description': 'Spring 2016 #nyusw site',
             'for': 'Public-facing websites'
         }, {
             'name': 'Career Fair',
