@@ -32,6 +32,7 @@ angular
                         var mostPopular = {};
                         var eventNameValues = [];
                         var attendeesValues = [];
+                        var rsvpsValues = [];
 
                         // Loop through events and store values for each attendee, and other measures.
                         _(events).forEach(function(event) {
@@ -54,6 +55,12 @@ angular
                                 if(attendees.length > 1) {
                                     eventNameValues.push(event.attributes.title);
                                     attendeesValues.push(event.relationships.attendees.data.length);
+                                    if (event.relationships.rsvps && event.relationships.rsvps.data) {
+                                        rsvpsValues.push(event.relationships.rsvps.data.length);
+                                    }
+                                    else {
+                                        rsvpsValues.push(null);
+                                    }
                                 }
                             }
                         }).value();
@@ -120,8 +127,11 @@ angular
                                 }
                             },
                             series: [{
-                                name: 'Events',
+                                name: 'Attendees',
                                 data: attendeesValues.reverse()
+                            }, {
+                                name: 'RSVPS',
+                                data: rsvpsValues.reverse()
                             }]
                         };
 
