@@ -20,11 +20,35 @@ angular
                 return false;
             }
             else {
+
                 // Their TEAM_MEMBER role is not important. So we will slice it out
                 // of the roles object. It is not useful for us.
                 var teamMemberIndex = roles.indexOf('TEAM_MEMBER');
                 if(teamMemberIndex > -1) {
                     roles.splice(teamMemberIndex, 1);
+                }
+
+
+                var fullIndexes = []
+                roles.findIndex(function(value, index) {
+                    if (value.match('FULL_')) {
+                        fullIndexes.push(index)
+                    }
+                });
+
+                for (var i = fullIndexes.length-1; i >= 0; i--) {
+                    roles.splice(fullIndexes[i], 1);
+                }
+
+                var trialIndexes = []
+                roles.findIndex(function(value, index) {
+                    if (value.match('TRIAL_')) {
+                        trialIndexes.push(index)
+                    }
+                });
+
+                for (var i = trialIndexes.length-1; i >= 0; i--) {
+                    roles.splice(trialIndexes[i], 1);
                 }
 
                 // TEAM_LEAD is the same as TEAM_MEMBER. Does not help us determine
