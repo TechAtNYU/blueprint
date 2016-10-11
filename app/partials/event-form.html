@@ -1,0 +1,134 @@
+<div>
+	<label>
+		Title
+	</label>
+	<p class="help-block">
+		Used for meetup, facebook, etc.
+	</p>
+	<div>
+		<input name="title" ng-model="event.title">
+	</div>
+</div>
+<div>
+	<label>
+		Start Date and Time
+	</label>
+	<div>
+		<input type="datetime-local" name="startdatetime" ng-model="event.startDateTime">
+	</div>
+</div>
+<div>
+	<label>
+		End Date and Time
+	</label>
+	<div>
+		<input type="datetime-local" name="enddatetime" ng-model="event.endDateTime">
+	</div>
+</div>
+<div>
+	<label>
+		Description
+	</label>
+	<p class="help-block">
+		One or two sentences on the event’s purpose.
+	</p>
+	<div>
+		<input name="description" ng-model="event.description">
+	</div>
+</div>
+<div>
+	<label>
+		Details
+	</label>
+	<p class="help-block">
+		Information like: what attendees need to know to attend this event (prerequisites), exactly what they will make, what they should install in advance, how to get into the building, etc. (Does not include the speakers' bios, if any.)
+	</p>
+	<div>
+		<textarea name="details" ng-model="event.details"></textarea>
+	</div>
+</div>
+<div>
+	<label>
+		Venues
+	</label>
+	<input type="radio" name="useNewVenues" value="false" ng-model="event.useNewVenues">
+	<select name="existing_venue" ng-model="event.existingvenue">
+		<option ng-repeat="venue in venues" value="{{venue.attributes.name}}">	
+			{{venue.attributes.name}}
+		</option>
+	</select>
+	<input type="radio" name="useNewVenues" value="false" ng-model="event.useNewVenues">
+</div>
+<div>
+	<label>
+		Team
+	</label>
+	<select name="teams" ng-model="event.team">
+		<option ng-repeat="team in teams" value="{{team.attributes.name}}">{{team.attributes.name}}</option>
+	</select>
+</div>
+<div>
+	<label>
+		Presenter
+	</label>
+	<input type="radio" name="useNewPresenter" value="false" ng-model="event.useNewPresenter">
+	<select name="existing_presenter" ng-model="event.existingPresenter">
+		<option ng-repeat="presenter in presenters" value="{{presenter.attributes.name}}">	
+			{{presenter.attributes.name}}
+		</option>
+	</select>
+	<input type="radio" name="useNewPresenter" value="false" ng-model="event.useNewPresenter">
+</div>
+<div>
+	<label>
+		Coorganizers
+	</label>
+	<input type="radio" name="useNewCoorganizer" value="false" ng-model="event.useNewCoorganizer">
+	<select name="existing_coorganizer" ng-model="event.existingCoorganizer">
+		<option ng-repeat="organization in organizations" value="{{organization.attributes.name}}">	
+			{{organization.attributes.name}}
+		</option>
+	</select>
+	<input type="radio" name="useNewCoorganizer" value="false" ng-model="event.useNewCoorganizer">
+</div>
+<div>
+	<label>
+		R.S.V.P. URL
+	</label>
+	<div>
+		<input name="rsvpUrl" ng-model="event.rsvpUrl">
+	</div>
+</div>
+<div>
+	<label>
+		Level
+	</label>
+	<p class="help-block">
+		<ul>
+			<li>
+				Beginner events don’t require attendees to have prior knowledge about any particular topic.
+			</li>
+			<li>
+				Intermediate events are geared at attendees who may not have any experience with the topic being taught, but know about the background topics it depends on.
+			</li>
+			<li>
+				Advanced events offer a deep dive into a specialized topic and are aimed at grad students or those with outside work or expertise on the subject being taught.
+			</li>
+		</ul>
+	</p>
+	<select name="level" ng-model="event.level">
+		<option value="1">Beginner</option>
+		<option value="2">Intermediate</option>
+		<option value="3">Beginner</option>
+	</select>
+</div>
+<div>
+	<label>
+		Aims
+	</label>
+	<div>
+		<select name="aims" ng-model="event.aim">
+			<option value=""></option>
+		</select>
+	</div>
+</div>
