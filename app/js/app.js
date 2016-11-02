@@ -7,6 +7,7 @@ angular.module('app', [
     'ui.router',
     'ui.bootstrap',
     'restangular',
+    'localytics.directives',
     'app.services',
     'app.directives',
     'app.filters',
