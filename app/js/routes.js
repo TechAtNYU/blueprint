@@ -44,5 +44,15 @@ angular.module('app')
                 url: '/progress',
                 templateUrl: 'partials/progress.html',
                 controller: 'ProgressCtrl'
+            })
+            .state('forms', {
+                url: '/forms',
+                templateUrl: 'partials/forms.html',
+                controller: 'FormsCtrl'
+            })
+            .state('event-form', {
+                url: '/forms/event',
+                templateUrl: 'partials/event-form.html',
+                controller: 'EventFormCtrl'
             });
     });

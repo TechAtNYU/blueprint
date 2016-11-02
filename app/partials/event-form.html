@@ -1,0 +1,177 @@
+<div>
+	<label>
+		<strong>
+			Title
+		</strong>
+	</label>
+	<br>
+	<p class="help-block">
+		Used for meetup, facebook, etc.
+	</p>
+	<div>
+		<input name="title" ng-model="event.title">
+	</div>
+</div>
+<div>
+	<label>
+		<strong>
+			Start Date and Time
+		</strong>
+	</label>
+	<br>
+	<div>
+		<input type="datetime-local" name="startdatetime" ng-model="event.startDateTime">
+	</div>
+</div>
+<div>
+	<label>
+		<strong>
+			End Date and Time
+		</strong>
+	</label>
+	<br>
+	<div>
+		<input type="datetime-local" name="enddatetime" ng-model="event.endDateTime">
+	</div>
+</div>
+<div>
+	<label>
+		<strong>
+			Description
+		</strong>
+	</label>
+	<br>
+	<p class="help-block">
+		One or two sentences on the event’s purpose.
+	</p>
+	<div>
+		<input name="description" ng-model="event.description">
+	</div>
+</div>
+<div>
+	<label>
+		<strong>
+			Details
+		</strong>
+	</label>
+	<br>
+	<p class="help-block">
+		Information like: what attendees need to know to attend this event (prerequisites), exactly what they will make, what they should install in advance, how to get into the building, etc. (Does not include the speakers' bios, if any.)
+	</p>
+	<div>
+		<textarea name="details" ng-model="event.details"></textarea>
+	</div>
+</div>
+<div>
+	<label>
+		<strong>
+			Venue
+		</strong>
+	</label>
+	<br>
+	<select name="venue" ng-model="event.venue">
+		<option ng-repeat="venue in fields.venues" value="{{venue.id}}">	
+			{{venue.attributes.name}}
+		</option>
+	</select>
+</div>
+<div>
+	<label>
+		<strong>
+			Teams
+		</strong>
+	</label>
+	<br>
+	<select multiple name="teams" ng-model="event.teams">
+		<option value="{{team.id}}" ng-repeat="team in fields.teams">{{team.attributes.name}}</option>
+	</select>
+</div>
+<div>
+	<label>
+		<strong>
+			Presenters
+		</strong>
+	</label>
+	<br>
+	<select multiple name="presenters" ng-model="event.presenters">
+		<option value="{{pres.id}}" ng-repeat="pres in fields.presenters">{{pres.attributes.name}}</option>
+	</select>
+</div>
+<div>
+	<label>
+		<strong>
+			Coorganizers
+		</strong>
+	</label>
+	<br>
+	<select multiple name="coorganizers" ng-model="event.coorganizers">
+		<option value="{{org.id}}" ng-repeat="org in fields.organizations">{{org.attributes.name}}</option>
+	</select>
+</div>
+<div>
+	<label>
+		<strong>
+			R.S.V.P. URL
+		</strong>
+	</label>
+	<br>
+	<div>
+		<input name="rsvpUrl" ng-model="event.rsvpUrl">
+	</div>
+</div>
+<div>
+	<label>
+		<strong>
+			Level
+		</strong>
+	</label>
+	<br>
+	<p class="help-block">
+		<ul>
+			<li>
+				Beginner events don’t require attendees to have prior knowledge about any particular topic.
+			</li>
+			<li>
+				Intermediate events are geared at attendees who may not have any experience with the topic being taught, but know about the background topics it depends on.
+			</li>
+			<li>
+				Advanced events offer a deep dive into a specialized topic and are aimed at grad students or those with outside work or expertise on the subject being taught.
+			</li>
+		</ul>
+	</p>
+	<select name="levels" ng-model="event.level">
+		<option ng-repeat="level in fields.levels track by $index" value="{{$index}}">
+			{{level}}
+		</option>
+	</select>
+</div>
+<div>
+	<label>
+		<strong>
+			Aims
+		</strong>
+	</label>
+	<br>
+	<div>
+		<select name="aims" ng-model="event.aim">
+			<option ng-repeat="aim in fields.aims track by $index" value="{{$index}}">
+				{{aim}}
+			</option>
+		</select>
+	</div>
+</div>
+<div>
+	<label>
+		<strong>	
+			Is Internal
+		</strong>
+	</label>
+	<br>
+	Yes &nbsp <input type="radio" name="isInternal" value="true">
+	No &nbsp <input type="radio" name="isInternal" value="false">
+	<br><br>
+</div>
+<div>
+	<button ng-click="submit()">Submit</button>
+	<button ng-click="draft()">Draft</button>
+</div>
