@@ -44,5 +44,10 @@ angular.module('app')
                 url: '/progress',
                 templateUrl: 'partials/progress.html',
                 controller: 'ProgressCtrl'
+            })
+            .state('reimbursment', {
+                url: '/reimburse',
+                templateUrl: 'partials/reimburse.html',
+                controller: 'ReimburseCtrl'
             });
     });
