@@ -49,5 +49,10 @@ angular.module('app')
                 url: '/reimburse',
                 templateUrl: 'partials/reimburse.html',
                 controller: 'ReimburseCtrl'
+            })
+            .state('add-events',{
+                url: '/add-events',
+                templateUrl: 'partials/add-events.html',
+                controller: 'AddEventsCtrl'
             });
     });

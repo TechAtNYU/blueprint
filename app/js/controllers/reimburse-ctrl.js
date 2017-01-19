@@ -2,11 +2,13 @@
 
 angular
     .module('app.controllers')
-    .controller('ReimburseCtrl', function($scope, $http) {
+    .controller('ReimburseCtrl', function($scope, Restangular) {
       $scope.formFields = {};
       $scope.submit = function() {
 
-        $http.post('https://api.tnyu.org/v3-test/expenses',{
+
+        Restangular.all('expenses').post(
+        {
           'data': {
             'type': 'expenses',
             'attributes': {
@@ -17,15 +19,12 @@ angular
             }
           }
         },
+
         {
           'headers': {
-            'Accept': 'application/vnd.api+json',
+            'Accept': 'application/vnd.api+json, application/*, */*',
             'Content-Type': 'application/vnd.api+json'
           }
-        }).then(function(result){
-            console.log(result);
         });
-        }
       }
-    );
-      //onReady();
+    });
