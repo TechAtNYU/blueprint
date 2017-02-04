@@ -1,0 +1,31 @@
+<h3>Reimbursement</h3>
+
+  <form ng-submit = "submit()">
+    <br>
+    <p>
+    <strong>Short Name: </strong>
+      <input type = "text" ng-model = "formFields.event">
+    </p>
+    <p>
+    <strong>Amount: </strong>
+
+      <input type = "text" ng-model = "formFields.moneyAmount">
+    </p>
+    <p>
+    <strong>Reimburse From: </strong>
+      <select ng-model="formFields.typeRequest">
+        <option value = "CSALS"> CSALS
+        <option value = "NYUEI"> NYUEI
+        <option value = "Paypal"> Paypal
+      </select>
+    </p>
+    <p>
+    <strong>Date of Expense: </strong>
+      <input type = "date" ng-model = "formFields.date">
+    </p>
+    <input type = "submit">
+
+  </form>
+
+
+  {{ name }}
