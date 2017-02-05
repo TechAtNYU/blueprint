@@ -3,8 +3,6 @@
 angular
     .module('app.controllers')
     .controller('AddEventsCtrl', function($scope, Restangular) {
-//$http
-
       $scope.formFields = {};
       $scope.submit = function() {
 

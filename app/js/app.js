@@ -17,7 +17,8 @@ angular.module('app', [
     'nvd3',
     'ui.grid',
     'highcharts-ng',
-    'angularMoment'
+    'angularMoment',
+    'localytics.directives'
 ]).config(function(RestangularProvider) {
     // Setting the Restangular URL base. In production set to /v3.
     // In staging or development set to /v3-test
@@ -26,7 +27,7 @@ angular.module('app', [
     // Configuring Restangular to work with JSONAPI spec
     RestangularProvider.setDefaultHeaders({
         'Accept': 'application/vnd.api+json, application/*, */*',
-        'Content-Type': 'application/vnd.api+json; ext=bulk'
+        'Content-Type': 'application/vnd.api+json'
     });
 
     RestangularProvider.addResponseInterceptor(function(data) {

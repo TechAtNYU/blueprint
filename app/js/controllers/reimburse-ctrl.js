@@ -1,12 +1,10 @@
 'use strict';
 
 angular
-    .module('app.controllers')
+    .module('app.controllers', ['localytics.directives'])
     .controller('ReimburseCtrl', function($scope, Restangular) {
       $scope.formFields = {};
       $scope.submit = function() {
-
-
         Restangular.all('expenses').post(
         {
           'data': {
@@ -18,13 +16,6 @@ angular
               'withdrawnFrom': $scope.formFields.typeRequest,
             }
           }
-        },
-
-        {
-          'headers': {
-            'Accept': 'application/vnd.api+json, application/*, */*',
-            'Content-Type': 'application/vnd.api+json'
-          }
-        });
+        })
       }
     });
