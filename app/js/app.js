@@ -33,8 +33,8 @@ angular.module('app', [
     RestangularProvider.addResponseInterceptor(function(data) {
         return data;
     });
-}).config(function(datepickerConfig) {
-    datepickerConfig.showWeeks = false;
+}).config(function(uibDatepickerConfig) {
+    uibDatepickerConfig.showWeeks = false;
 }).config(function(ezfbProvider) {
     ezfbProvider.setInitParams({
         appId: '723930997711071',

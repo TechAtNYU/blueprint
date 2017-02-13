@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('app.controllers', ['localytics.directives'])
+    .module('app.controllers')
     .controller('ReimburseCtrl', function($scope, Restangular) {
       $scope.formFields = {};
       $scope.submit = function() {
@@ -14,7 +14,7 @@ angular
               'amount': $scope.formFields.moneyAmount,
               'date': $scope.formFields.date,
               'withdrawnFrom': $scope.formFields.typeRequest,
-            }
+              }
           }
         })
       }
