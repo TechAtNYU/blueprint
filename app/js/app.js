@@ -22,7 +22,7 @@ angular.module('app', [
 ]).config(function(RestangularProvider) {
     // Setting the Restangular URL base. In production set to /v3.
     // In staging or development set to /v3-test
-    RestangularProvider.setBaseUrl('https://api.tnyu.org/v3-test');
+    RestangularProvider.setBaseUrl('https://api.tnyu.org/v3');
 
     // Configuring Restangular to work with JSONAPI spec
     RestangularProvider.setDefaultHeaders({

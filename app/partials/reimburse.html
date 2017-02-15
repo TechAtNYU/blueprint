@@ -1,7 +1,9 @@
 <div class = "container" ng-controller = "ReimburseCtrl">
 <h3>Reimbursement</h3>
-
-
+  <p>
+    <div class = "alert alert-success" data-ng-show = "message" data-ng-bind = "message"></div>
+    <div class = "alert alert-warning" data-ng-show = "error" data-ng-bind = "error"></div>
+  </p>
   <form ng-submit = "submit()">
     <p>
       <strong>Short Name: </strong>
@@ -26,7 +28,4 @@
     </p>
     <input type = "submit">
   </form>
-
-</div>
-
 </div>

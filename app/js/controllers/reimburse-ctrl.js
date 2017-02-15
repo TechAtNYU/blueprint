@@ -13,9 +13,14 @@ angular
               'shortName': $scope.formFields.event,
               'amount': $scope.formFields.moneyAmount,
               'date': $scope.formFields.date,
-              'withdrawnFrom': $scope.formFields.typeRequest,
+              'withdrawnFrom': $scope.formFields.typeRequest
               }
           }
-        })
+
+        
+        }).then(function(){ 
+          $scope.message = "Your entry has been sent!";
+        });
       }
+      
     });
