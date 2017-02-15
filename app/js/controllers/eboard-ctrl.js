@@ -78,7 +78,7 @@ angular
                                 var indexOfMember = $scope.teams[valWithoutLead].members.indexOf(eachMember);
                                 $scope.teams[valWithoutLead].members.splice(indexOfMember, 1);
                             }
-                        }).value();
+                        });
                     }
 
                     // Add the person to team. This simply just adds the person to the members array
@@ -90,7 +90,7 @@ angular
                         'apiId': person.id,
                         'isLead': isLead
                     });
-                }).value();
+                });
             }
         }
 
@@ -116,7 +116,7 @@ angular
                             teamRoleNameToName[team.attributes.roleName] = {};
                             teamRoleNameToName[team.attributes.roleName].name = team.attributes.name;
                             teamRoleNameToName[team.attributes.roleName].members = [];
-                        }).value();
+                        });
                         $scope.teams = teamRoleNameToName;
 
                         // Loop through all of the people and set the roles for each individual.
@@ -126,7 +126,7 @@ angular
                             if(person.attributes && person.attributes.roles && person.attributes.roles.length > 0) {
                                 person.attributes.mainRoles = setRoles(person);
                             }
-                        }).value();
+                        });
                     });
             });
     });
