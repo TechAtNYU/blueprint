@@ -14,5 +14,8 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-jasmine": "^0.2.2",
     "coveralls": "^2.11.2"
+  },
+  "dependencies": {
+    "angular-chosen-localytics": "^1.5.1"
   }
 }

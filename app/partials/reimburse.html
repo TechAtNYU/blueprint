@@ -1,0 +1,31 @@
+<div class = "container" ng-controller = "ReimburseCtrl">
+<h3>Reimbursement</h3>
+  <p>
+    <div class = "alert alert-success" data-ng-show = "message" data-ng-bind = "message"></div>
+    <div class = "alert alert-warning" data-ng-show = "error" data-ng-bind = "error"></div>
+  </p>
+  <form ng-submit = "submit()">
+    <p>
+      <strong>Short Name: </strong>
+      <input class = "chosen-container-single" type = "text" ng-model = "formFields.event">
+    </p>
+    <p>
+      <strong>Amount: </strong>
+      <input type = "text" ng-model = "formFields.moneyAmount">
+    </p>
+    <p>
+      <strong>Reimburse From: </strong>
+      <select data-placeholder="Choose a payment form..." chosen
+        inherit-select-classes="true" ng-model="formFields.typeRequest" style = "width: 200px;">
+        <option value = "CSALS"> CSALS
+        <option value = "NYUEI"> NYUEI
+        <option value = "Paypal"> Paypal
+      </select>
+    </p>
+    <p>
+      <strong>Date of Expense: </strong>
+      <input type = "date" class = "chosen-single" ng-model = "formFields.date">
+    </p>
+    <input type = "submit">
+  </form>
+</div>
