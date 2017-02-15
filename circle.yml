@@ -5,7 +5,7 @@ machine:
 test:
   pre:
     - npm install -g bower
-    - cd $HOME/$CIRCLE_PROJECT_REPONAME/ && bower install && cd app && bower install angular-nvd3 && bower install angular-ui-grid
+    - cd $HOME/$CIRCLE_PROJECT_REPONAME/ && npm install && bower install && cd app && bower install angular-nvd3 && bower install angular-ui-grid
   override:
     - echo "No tests are needed"
 
