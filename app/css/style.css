@@ -4,7 +4,7 @@
     position: absolute;
     top: 100px;
     width: 100%;
-    text-shadow: 1px 1px 2px white, -1px -1px 2px white, -4px 4px 4px white, -4px 4px 4px white
+    text-shadow: 1px 1px 2px white, -1px -1px 2px white, -4px 4px 4px white, -4px 4px 4px white;
 }
 .container {
     max-width: 30em !important;
@@ -19,4 +19,4 @@
     /* You can edit this line and add as per your style */
 }
 
-.alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px}.alert h4{margin-top:0;color:inherit}.alert-success{color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6}.alert-success hr{border-top-color:#c9e2b3}.alert-success .alert-link{color:#2b542c}
+.alert{padding:15px;margin-bottom:20px;border:1px solid transparent;border-radius:4px;}.alert h4{margin-top:0;color:inherit;}.alert-success{color:#3c763d;background-color:#dff0d8;border-color:#d6e9c6;}.alert-success hr{border-top-color:#c9e2b3;}.alert-success .alert-link{color:#2b542c;}
