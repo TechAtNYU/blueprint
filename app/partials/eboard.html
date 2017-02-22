@@ -9,6 +9,7 @@
                     <img ng-if="member.imgUrl" width="200px" height="200px" src="{{member.imgUrl}}">
                     <p ng-if="member.isLead === true"><b><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></b></p>
                     <p ng-if="member.isLead === false"><a href="http://intranet.sexy/#/r/people/list/{{member.apiId}}">{{member.name}}</a></p>
+                    <p ng-if="">{{member.status}}</p>
                 </td>
             </tr>
         </table>

@@ -23,6 +23,8 @@ angular
 
                 // Their TEAM_MEMBER role is not important. So we will slice it out
                 // of the roles object. It is not useful for us.
+
+
                 var teamMemberIndex = roles.indexOf('TEAM_MEMBER');
                 if(teamMemberIndex > -1) {
                     roles.splice(teamMemberIndex, 1);
@@ -83,25 +85,24 @@ angular
 
                     // Add the person to team. This simply just adds the person to the members array
                     // for that particular team in the team scope.
+                    var aPerson = {
+                        'name': person.attributes.name,
+                        'uniqId': index,
+                        'apiId': person.id,
+                        'isLead': isLead
+                    }
+
                     if (person.attributes.imgUrl) {
-                        $scope.teams[valWithoutLead].members.push({
-                            'name': person.attributes.name,
-                            'imgUrl': person.attributes.imgUrl,
-                            'uniqId': index,
-                            'apiId': person.id,
-                            'isLead': isLead
-                        });
+                        aPerson.imgUrl = person.attributes.imgUrl
                     }
 
                     else {
-                        $scope.teams[valWithoutLead].members.push({
-                            'name': person.attributes.name,
-                            'imgUrl': 'http://lazyadmin.nl/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png',
-                            'uniqId': index,
-                            'apiId': person.id,
-                            'isLead': isLead
-                        });
+                        aPerson.imgUrl = '/img/default-image.png'
                     }
+
+                    $scope.teams[valWithoutLead].members.push(aPerson);
+
+                    
 
 
                 });
