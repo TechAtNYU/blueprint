@@ -23,8 +23,6 @@ angular
 
                 // Their TEAM_MEMBER role is not important. So we will slice it out
                 // of the roles object. It is not useful for us.
-
-
                 var teamMemberIndex = roles.indexOf('TEAM_MEMBER');
                 if(teamMemberIndex > -1) {
                     roles.splice(teamMemberIndex, 1);
@@ -91,20 +89,16 @@ angular
                         'apiId': person.id,
                         'isLead': isLead
                     }
-
+                    if (index in trialIndexes) {
+                        aPerson.status = "- Trial"
+                    }
                     if (person.attributes.imgUrl) {
                         aPerson.imgUrl = person.attributes.imgUrl
                     }
-
                     else {
                         aPerson.imgUrl = '/img/default-image.png'
                     }
-
                     $scope.teams[valWithoutLead].members.push(aPerson);
-
-                    
-
-
                 });
             }
         }
