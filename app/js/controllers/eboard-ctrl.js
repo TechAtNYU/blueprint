@@ -83,13 +83,22 @@ angular
 
                     // Add the person to team. This simply just adds the person to the members array
                     // for that particular team in the team scope.
-                    $scope.teams[valWithoutLead].members.push({
+                    var aPerson = {
                         'name': person.attributes.name,
-                        'imgUrl': person.attributes.imgUrl,
                         'uniqId': index,
                         'apiId': person.id,
                         'isLead': isLead
-                    });
+                    }
+                    if (index in trialIndexes) {
+                        aPerson.status = "- Trial"
+                    }
+                    if (person.attributes.imgUrl) {
+                        aPerson.imgUrl = person.attributes.imgUrl
+                    }
+                    else {
+                        aPerson.imgUrl = '/img/default-image.png'
+                    }
+                    $scope.teams[valWithoutLead].members.push(aPerson);
                 });
             }
         }
