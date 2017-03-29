@@ -11,6 +11,10 @@ angular
          * Returns configuration for high chart. Makes it easier so we don't have to duplicate
          * the same kind of object structure.
          */
+        $scope.HCEventsWithCheckins = {};
+        $scope.HCCheckins = {};
+        $scope.HCGender = {};
+        $scope.HCNewPeople = {};
         function returnHighChartConfig(title, subtitle, monthCategories, yAxis, yAxisMax, data) {
             return {
                 chart: {
@@ -174,10 +178,10 @@ angular
                                     }
                                     genderByEventMonth[gender][currentMonth] += 1;
                                 }
-                            }).value();
+                            });
                         }
                     }
-                }).value();
+                });
 
                 // Simple hash map we use to generate the main chart. This basically
                 // splits up the checkins depending on if they are on the e-board
@@ -194,7 +198,7 @@ angular
                         }
                         checkinsAnalytics.general += 1;
                     }
-                }).value();
+                });
 
                 // We create a dataset, which is basically just an array with
                 // a simple object. This is what is required by the library.
@@ -273,7 +277,7 @@ angular
                         }
                         newPeoplePerMonth[currentMonth] += 1;
                     }
-                }).value();
+                });
 
                 // Take the hashmap and create a dataset out of it.
                 var newPeopleDataset = [{

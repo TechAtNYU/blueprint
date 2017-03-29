@@ -141,9 +141,9 @@ angular
                             else {
                                 currentGroup.schools[val] += 1;
                             }
-                        }).value();
+                        });
                     }
-                }).value();
+                });
 
                 // Create diversity for ui-grid
                 // This utilizes the functions above to create the ui-grid.
@@ -154,9 +154,9 @@ angular
                         current['University Name'] = valschools;
                         current.Count = val.schools[valschools];
                         myData.push(current);
-                    }).value();
+                    });
                     addGridOptionsToSchools(val, myData);
-                }).value();
+                });
 
                 $scope.diversity = diversity;
             });
