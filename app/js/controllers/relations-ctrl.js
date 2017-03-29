@@ -46,7 +46,7 @@ angular
                             if(organization.relationships && organization.relationships.liaisons && organization.relationships.liaisons.data && organization.relationships.liaisons.data) {
                                 ResourceService.resourceRelationToMap(organization, organization.relationships.liaisons.data, peopleIdToLiasons);
                             }
-                        }).value();
+                        });
 
                         // This is to map the person to the relationship and start building the relations hashmap.
                         // First thing we do is just loop through the person array.
@@ -72,7 +72,7 @@ angular
                                         if(currentRelation.organizations.indexOf(singleLiason.attributes.name) === -1) {
                                             currentRelation.organizations.push(singleLiason.attributes.name);
                                         }
-                                    }).value();
+                                    });
                                 }
 
                                 // Here we easily decide what role we have to insert their data into.
@@ -90,7 +90,7 @@ angular
                                     }
                                 }
                             }
-                        }).value();
+                        });
 
                         // Add the relations object to the current scope.
                         $scope.relations = relations;

@@ -8,7 +8,7 @@ angular
     .module('app.controllers')
     .controller('InitiativeAnalyticsCtrl', function($scope, $location, $stateParams, Restangular, uiGridConstants, DateService, ResourceService) {
         var resourceId = $stateParams.id;
-
+        $scope.HCInitiativeAnalysis = {}
         /**
          * Gets event data that is filtered for the initiative in question. The resourceId is what is passed
          * when you click an initiative on the events-analytics page or if you supply the resourceId through
@@ -28,7 +28,6 @@ angular
                         // mostPopular: how many times has each person came to an event.
                         // eventNameValues and attendeesValues needed to generate graphs.
                         var personIdToName = ResourceService.resourceIdToResource(people);
-                        console.log(personIdToName);
                         var mostPopular = {};
                         var eventNameValues = [];
                         var attendeesValues = [];
@@ -48,7 +47,7 @@ angular
                                             mostPopular[personIdToName[attendee.id].attributes.name] = 1;
                                         }
                                     }
-                                }).value();
+                                });
 
                                 // Checkins over time graph
                                 if(attendees.length > 1) {
@@ -56,7 +55,7 @@ angular
                                     attendeesValues.push(event.relationships.attendees.data.length);
                                 }
                             }
-                        }).value();
+                        });
 
                         // Add event checkin data into the array so we can attach it with our gridOptions.
                         var eventCheckinData = [];
@@ -66,7 +65,7 @@ angular
                             current['Event Checkins'] = mostPopular[val];
                             if(val != 'undefined')
                                 eventCheckinData.push(current);
-                        }).value();
+                        });
 
                         // Basic grid settings that we are required to fill in. The grid has two columns: Name and Event Checkins. One is sorted in ascending order, and the other in descending order.
                         $scope.gridOptions = {
@@ -132,4 +131,5 @@ angular
     
         // We also pass the comparesDate function from the DateService imported above.
         $scope.compareDates = DateService.compareDates;
+    
     });

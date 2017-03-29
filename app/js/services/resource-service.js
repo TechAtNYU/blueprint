@@ -18,7 +18,7 @@ angular
 
             _(resourceData).forEach(function(resource) {
                 resourceDict[resource.id] = resource;
-            }).value();
+            });
 
             return resourceDict;
         };
@@ -34,6 +34,6 @@ angular
                     resourceIdToRelation[singleRelationship.id] = [];
                 }
                 resourceIdToRelation[singleRelationship.id].push(resource);
-            }).value();
+            });
         }
     });
