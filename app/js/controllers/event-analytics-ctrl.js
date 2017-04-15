@@ -159,7 +159,7 @@ angular
 
                                 // Maps the ID of a question in the API to the position of the question in the questions array.
                                 questionArrayPosition[val.id] = questions.length - 1;
-                            }).value();
+                            });
                         }
 
                         /**
@@ -186,9 +186,9 @@ angular
                                                     id: answer.id
                                                 });
                                             });
-                                    }).value();
+                                    });
                                 }
-                            }).value();
+                            });
                         }
 
                         // We put the event data and the questions data into the global scope.
